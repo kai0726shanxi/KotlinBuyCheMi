@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cl_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       >
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusableInTouchMode="true"
+            android:descendantFocusability="blocksDescendants"
+            android:fillViewport="true"
+            android:overScrollMode="never">
+
+            <com.classic.common.MultipleStatusView
+                android:id="@+id/multipleStatusView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:emptyView="@layout/layout_empty_view"
+                app:errorView="@layout/layout_error_view"
+                app:loadingView="@layout/layout_loading_view"
+                app:noNetworkView="@layout/layout_network_view">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycle_view"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.bigkoo.convenientbanner.ConvenientBanner
+                    android:id="@+id/home_banner"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="@dimen/dp_100"
+                    android:layout_margin="@dimen/dp_10"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recycle_view" />
+
+                <TextView
+                    android:id="@+id/tv_imagetext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="综合图文"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/home_banner" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycle_imageandtext"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:overScrollMode="never"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_imagetext" />
+
+                <View
+                    android:id="@+id/v_line1"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:background="@color/home_bg"
+                    app:layout_constraintTop_toBottomOf="@+id/recycle_imageandtext" />
+
+                <TextView
+                    android:id="@+id/tv_popular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:layout_marginTop="@dimen/sp_10"
+                    android:text="热门帖子"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/v_line1" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycle_popular"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_15"
+                    android:overScrollMode="never"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_popular" />
+
+                <View
+                    android:id="@+id/v_line2"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:background="@color/home_bg"
+                    app:layout_constraintTop_toBottomOf="@+id/recycle_popular" />
+
+                <TextView
+                    android:id="@+id/tv_bbs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="论坛动态"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/v_line2" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycle_bbs"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:overScrollMode="never"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_bbs" />
+
+            </com.classic.common.MultipleStatusView>
+        </android.support.v4.widget.NestedScrollView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</android.support.constraint.ConstraintLayout>

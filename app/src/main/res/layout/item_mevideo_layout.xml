@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cl_bg"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_me_video_bg">
+
+    <ImageView
+        android:id="@+id/iv_video"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_186"
+        android:background="@mipmap/test_video"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="@dimen/dp_30"
+        android:layout_height="@dimen/dp_30"
+        android:src="@mipmap/ic_play"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_video"
+        app:layout_constraintLeft_toLeftOf="@+id/iv_video"
+        app:layout_constraintRight_toRightOf="@+id/iv_video"
+        app:layout_constraintTop_toTopOf="@+id/iv_video" />
+
+    <TextView
+        android:id="@+id/tv_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_15"
+        android:background="@drawable/bg_radius_black"
+        android:text="上海"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_video"
+        app:layout_constraintRight_toRightOf="@+id/iv_video" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:lines="2"
+        android:paddingLeft="@dimen/dp_11"
+        android:paddingTop="@dimen/dp_8"
+        android:paddingRight="@dimen/dp_25"
+        android:text="这种植物蛋白可取代肉蛋白，即将席卷全球"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_video" />
+
+    <com.chmichat.chat.view.CircleImageView
+        android:id="@+id/iv_avater"
+        android:layout_width="@dimen/dp_20"
+        android:layout_height="@dimen/dp_20"
+        android:layout_margin="@dimen/dp_10"
+        android:src="@mipmap/head_icon"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@+id/iv_avater"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_avater"
+        app:layout_constraintLeft_toRightOf="@+id/iv_avater"
+        android:layout_marginLeft="@dimen/dp_10"
+        app:layout_constraintRight_toLeftOf="@+id/tv_zan"
+        android:textSize="@dimen/sp_10"
+        android:textColor="@color/medynamic"
+        android:text="阁楼上的小猫"
+        />
+    <TextView
+        android:id="@+id/tv_zan"
+        android:layout_width="@dimen/dp_60"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_name"
+        android:drawableLeft="@mipmap/test_zan"
+        android:textColor="@color/medynamic"
+        android:textSize="@dimen/sp_10"
+        android:text="999999"
+        android:lines="1"
+        android:ellipsize="end"
+        android:drawablePadding="@dimen/dp_5"
+        android:gravity="center_vertical"
+        android:layout_marginRight="@dimen/dp_15"/>
+    <View
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_10"
+        app:layout_constraintTop_toBottomOf="@+id/iv_avater"/>
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+	<dimen name="fab_margin">34.1333dp</dimen>
+	<dimen name="padding_tab_layout_bottom">108.8000dp</dimen>
+	<dimen name="padding_common">21.3333dp</dimen>
+	<dimen name="padding_common_h">32.0000dp</dimen>
+	<dimen name="padding_common_v">21.3333dp</dimen>
+	<dimen name="padding_common_d">10.6667dp</dimen>
+	<dimen name="textSize_small_10">21.3333sp</dimen>
+	<dimen name="textSize_small">25.6000sp</dimen>
+	<dimen name="textSize_content">29.8667sp</dimen>
+	<dimen name="textSize_titleSmall">34.1333sp</dimen>
+	<dimen name="textSize_title">38.4000sp</dimen>
+	<dimen name="division_line">1.0667dp</dimen>
+</resources>

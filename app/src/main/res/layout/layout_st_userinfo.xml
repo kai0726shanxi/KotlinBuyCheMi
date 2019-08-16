@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/st_user_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/dp_15"
+    android:layout_marginRight="@dimen/dp_36"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="@+id/tv_right">
+
+    <com.chmichat.chat.view.CircleImageView
+        android:id="@+id/st_user_head"
+        android:layout_width="@dimen/dp_65"
+        android:layout_height="@dimen/dp_65"
+        android:src="@mipmap/head_icon"
+        app:borderColor="@color/color_gray"
+        app:borderWidth="2dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:type="circle" />
+
+    <TextView
+        android:id="@+id/st_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_15"
+        android:text=""
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toRightOf="@+id/st_user_head"
+        app:layout_constraintTop_toTopOf="@+id/st_user_head"
+        tools:layout_editor_absoluteX="81dp" />
+
+    <TextView
+        android:id="@+id/st_user_position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:text=""
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/st_user_name"
+        app:layout_constraintLeft_toRightOf="@+id/st_user_name" />
+
+    <TextView
+        android:id="@+id/st_user_company"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8"
+        android:text=""
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toLeftOf="@+id/st_user_name"
+        app:layout_constraintTop_toBottomOf="@+id/st_user_name" />
+
+
+</android.support.constraint.ConstraintLayout>

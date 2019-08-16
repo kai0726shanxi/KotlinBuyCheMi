@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/main.collapsing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/st_top_bg_view"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp_136"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/me_top_ic"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/iv_head"
+                    android:layout_width="@dimen/dp_72"
+                    android:layout_height="@dimen/dp_72"
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:layout_marginTop="@dimen/dp_100"
+                    android:src="@mipmap/head_icon"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_setting"
+                    android:layout_width="@dimen/dp_35"
+                    android:layout_height="@dimen/dp_35"
+                    android:layout_margin="@dimen/dp_10"
+                    android:padding="@dimen/dp_8"
+                    android:src="@mipmap/me_setting"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:maxEms="10"
+                    android:text="阁楼上的猫"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="@+id/iv_head"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_head" />
+
+                <TextView
+                    android:id="@+id/tv_edit"
+                    android:layout_width="@dimen/dp_76"
+                    android:layout_height="@dimen/sp_28"
+                    android:layout_margin="@dimen/dp_15"
+                    android:background="@drawable/btn_display_down"
+                    android:gravity="center"
+                    android:text="编辑资料"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_12"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/st_top_bg_view" />
+
+                <ImageView
+                    android:layout_width="@dimen/dp_14"
+                    android:layout_height="@dimen/dp_14"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:background="@mipmap/ic_avater_nv"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+                    app:layout_constraintLeft_toRightOf="@+id/tv_name"
+                    app:layout_constraintTop_toTopOf="@+id/tv_name" />
+
+                <com.chmichat.chat.view.PartColorTextView
+                    android:id="@+id/tv_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="120 发帖数  |  66 获赞"
+                    android:textSize="@dimen/sp_12"
+                    app:layout_constraintLeft_toLeftOf="@+id/iv_head"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+                <TextView
+                    android:id="@+id/tv_motto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="你要好看，懂理解，会生活。"
+                    android:textColor="@color/hometopright"
+                    android:textSize="@dimen/sp_12"
+                    app:layout_constraintLeft_toLeftOf="@+id/iv_head"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_num" />
+
+                <View
+                    android:id="@+id/line1"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="@dimen/dp_1"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:background="@color/home_bg"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_motto" />
+
+                <TextView
+                    android:id="@+id/tv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:text="最近常逛"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="@+id/iv_head"
+                    app:layout_constraintTop_toBottomOf="@+id/line1" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycle_view"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv1" />
+
+
+            </android.support.constraint.ConstraintLayout>
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/me_tabLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_40"
+            android:layout_margin="@dimen/dp_15"
+            android:layout_marginTop="@dimen/dp_10"
+            app:tabBackground="@color/transparent"
+            app:tabIndicatorColor="@color/displaynomal"
+            app:tabSelectedTextColor="@color/displaynomal"
+            app:tabPaddingStart="@dimen/dp_0"
+            app:tabPaddingEnd="@dimen/dp_0"
+            app:tabMinWidth="@dimen/dp_60"
+            app:tabTextAppearance="@style/TabLayoutText"
+            app:tabTextColor="#8E8E93" />
+    </android.support.design.widget.AppBarLayout>
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/mViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:elevation="0dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+</android.support.design.widget.CoordinatorLayout>

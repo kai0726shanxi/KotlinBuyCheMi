@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cl_bg"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_tag"
+        android:layout_width="@dimen/dp_35"
+        android:layout_height="@dimen/dp_16"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:background="@mipmap/zhiding_ic"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_title"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_15"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="西兰花能护发？美国品牌推出西兰花籽油"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_16"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@+id/tv_tag"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.chmichat.chat.view.CircleImageView
+        android:id="@+id/iv_head"
+        android:layout_width="@dimen/sp_22"
+        android:layout_height="@dimen/sp_22"
+        android:layout_margin="@dimen/dp_15"
+        android:src="@mipmap/head_icon"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_15"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="喵喵"
+        android:textColor="@color/displayt"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_head"
+        app:layout_constraintLeft_toRightOf="@+id/iv_head"
+        app:layout_constraintTop_toTopOf="@+id/iv_head" />
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_15"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:text="西兰花大家应该都不陌生，这种美味蔬菜是餐桌上常见食材，爱美的您可能还不知道，从西兰花种子中萃取的天然植物油，却有着神奇的护发护肤妙用…"
+        android:textColor="@color/current_time_text"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/img_content"
+        app:layout_constraintTop_toBottomOf="@+id/iv_head" />
+    <ImageView
+        android:id="@+id/img_content"
+        android:layout_width="@dimen/dp_82"
+        android:layout_height="@dimen/dp_56"
+        android:layout_marginRight="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_35"
+        android:src="@mipmap/test_dis_b"
+        android:scaleType="centerCrop"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        />
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="2019.09.09"
+        android:textColor="@color/current_time_text"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_share"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/tv_discuss" />
+
+    <TextView
+        android:id="@+id/tv_share"
+        android:layout_width="@dimen/dp_60"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginRight="@dimen/dp_15"
+        android:drawableLeft="@mipmap/test_zan"
+        android:drawablePadding="@dimen/dp_5"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="20"
+        android:textColor="@color/current_time_text"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_content" />
+
+    <TextView
+        android:id="@+id/tv_cai"
+        android:layout_width="@dimen/dp_60"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@mipmap/test_zan"
+        android:drawablePadding="@dimen/dp_5"
+        android:ellipsize="end"
+        android:lines="1"
+        android:paddingRight="@dimen/dp_5"
+        android:text="12"
+        android:textColor="@color/current_time_text"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_share"
+        app:layout_constraintRight_toLeftOf="@+id/tv_share" />
+
+    <TextView
+        android:id="@+id/tv_zan"
+        android:layout_width="@dimen/dp_60"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@mipmap/test_zan"
+        android:drawablePadding="@dimen/dp_5"
+        android:ellipsize="end"
+        android:lines="1"
+        android:paddingRight="@dimen/dp_5"
+        android:text="8888"
+        android:textColor="@color/current_time_text"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_share"
+        app:layout_constraintRight_toLeftOf="@+id/tv_cai" />
+
+    <TextView
+        android:id="@+id/tv_discuss"
+        android:layout_width="@dimen/dp_60"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@mipmap/test_zan"
+        android:drawablePadding="@dimen/dp_5"
+        android:ellipsize="end"
+        android:lines="1"
+        android:paddingRight="@dimen/dp_5"
+        android:text="66"
+        android:textColor="@color/current_time_text"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_share"
+        app:layout_constraintRight_toLeftOf="@+id/tv_zan" />
+     <View
+         android:layout_width="@dimen/dp_0"
+         android:layout_height="@dimen/dp_10"
+         app:layout_constraintLeft_toLeftOf="parent"
+         app:layout_constraintRight_toRightOf="parent"
+         android:layout_marginTop="@dimen/dp_20"
+         android:background="@color/home_bg"
+         app:layout_constraintTop_toBottomOf="@+id/tv_share"/>
+</android.support.constraint.ConstraintLayout>

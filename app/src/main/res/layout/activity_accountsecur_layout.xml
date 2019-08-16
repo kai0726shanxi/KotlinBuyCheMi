@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F8FB"
+    tools:context=".ui.activity.me.AccountSecurityActivity">
+
+    <include
+        layout="@layout/title_bar_layout" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/item_one"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="@color/white"
+        android:padding="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_1"
+        app:layout_constraintTop_toBottomOf="@+id/cl_bar">
+
+        <ImageView
+            android:id="@+id/iv_head"
+            android:layout_width="@dimen/dp_42"
+            android:layout_height="@dimen/dp_42"
+            android:layout_marginTop="@dimen/dp_1"
+            android:src="@mipmap/psd_forget_ic"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cl_bar" />
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:text="修改密码"
+            android:textColor="@color/black_ivory"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintLeft_toRightOf="@+id/iv_head"
+            app:layout_constraintTop_toTopOf="@+id/iv_head" />
+
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="密码由6-20位英文字母，数字或符号组成"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_head"
+            app:layout_constraintLeft_toLeftOf="@+id/tv1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableRight="@mipmap/next_ic"
+            android:drawablePadding="@dimen/dp_5"
+            android:text="修改"
+            android:textColor="@color/black_ivory"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_head"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/iv_head" />
+    </android.support.constraint.ConstraintLayout>
+
+
+</android.support.constraint.ConstraintLayout>
