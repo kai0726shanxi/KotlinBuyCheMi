@@ -3,8 +3,9 @@ package com.chmichat.chat.ui.activity.add
 import com.chmichat.chat.base.BaseActivity
 
 /**
- * 发布小视频
+ *
  * @Author 20342
+ * 发布小视频
  * @Date 2019/8/16 15:50
  */
 class ReleaseVideoActivity:BaseActivity() {
