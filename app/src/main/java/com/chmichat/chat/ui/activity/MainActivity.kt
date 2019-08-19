@@ -11,10 +11,11 @@ import com.flyco.tablayout.listener.CustomTabEntity
 import com.chmichat.chat.R
 import com.chmichat.chat.base.BaseActivity
 import com.chmichat.chat.showToast
+import com.chmichat.chat.ui.activity.add.HomeAddActivity
 import com.chmichat.chat.ui.fragment.home.HomeFragment
 import com.chmichat.chat.ui.fragment.mesetting.MeSettingFragment
 import com.chmichat.chat.ui.fragment.discover.DiscoverFragment
-import com.chmichat.chat.ui.fragment.orderlist.OrderListFragment
+import com.chmichat.chat.ui.fragment.message.MessageListFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
@@ -40,7 +41,7 @@ class MainActivity : BaseActivity() {
 
     private var mHomeFragment: HomeFragment? = null
     private var mNewsInformationFragment: DiscoverFragment? = null
-    private var mOrderListFragment: OrderListFragment? = null
+    private var mOrderListFragment: MessageListFragment? = null
     private var mMeSettingFragment: MeSettingFragment? = null
 
 
@@ -124,7 +125,7 @@ class MainActivity : BaseActivity() {
             3 //订单
             -> mOrderListFragment?.let {
                 transaction.show(it)
-            } ?: OrderListFragment.getInstance().let {
+            } ?: MessageListFragment.getInstance().let {
                 mOrderListFragment = it
                 transaction.add(R.id.fl_container, it, "order")
             }

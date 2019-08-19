@@ -17,6 +17,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -45,10 +46,10 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
 
-        />
+            />
 
         <activity
-            android:name=".ui.activity.HomeAddActivity"
+            android:name=".ui.activity.add.HomeAddActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.me.SettingActivity"
@@ -56,22 +57,36 @@
         <activity
             android:name=".ui.activity.LoginActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.activity.me.AccountSecurityActivity"
+        <activity
+            android:name=".ui.activity.me.AccountSecurityActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.me.MessageNotificationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.me.AboutUsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.me.UserInformationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.add.ReleaseImageTextActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.add.ChoseForumActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.add.SetAddressActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.add.ReleaseVideoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.home.ActivityProjectActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.home.PlayVideoActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.me.MessageNotificationActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.me.AboutUsActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.me.UserInformationActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.add.ReleaseImageTextActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.add.ChoseForumActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.add.SetAddressActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.add.ReleaseVideoActivity"
-            android:screenOrientation="portrait"/>
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.provider"

@@ -1,3 +1,4 @@
+/*
 package com.chmichat.chat.view;
 
 import android.app.AlertDialog;
@@ -16,7 +17,6 @@ import android.widget.Toast;
 import com.chmichat.chat.R;
 import com.shuyu.gsyvideoplayer.listener.GSYVideoShotListener;
 import com.shuyu.gsyvideoplayer.listener.GSYVideoShotSaveListener;
-import com.shuyu.gsyvideoplayer.listener.StandardVideoAllCallBack;
 import com.shuyu.gsyvideoplayer.utils.Debuger;
 import com.shuyu.gsyvideoplayer.utils.NetworkUtils;
 import com.shuyu.gsyvideoplayer.video.base.GSYBaseVideoPlayer;
@@ -27,10 +27,12 @@ import java.io.File;
 import moe.codeest.enviews.ENDownloadView;
 import moe.codeest.enviews.ENPlayView;
 
+*/
 /**
  * 标准播放器，继承之后实现一些ui显示效果，如显示／隐藏ui，播放按键等
  * Created by shuyu on 2016/11/11.
- */
+ *//*
+
 
 public class PullVideoPlayer extends GSYVideoPlayer {
 
@@ -77,9 +79,11 @@ public class PullVideoPlayer extends GSYVideoPlayer {
 
     protected int mDialogProgressNormalColor = -11;
 
-    /**
+    */
+/**
      * 1.5.0开始加入，如果需要不同布局区分功能，需要重载
-     */
+     *//*
+
     public PullVideoPlayer(Context context, Boolean fullFlag) {
         super(context, fullFlag);
     }
@@ -113,19 +117,23 @@ public class PullVideoPlayer extends GSYVideoPlayer {
 
     }
 
-    /**
+    */
+/**
      * 继承后重写可替换为你需要的布局
      *
      * @return
-     */
+     *//*
+
     @Override
     public int getLayoutId() {
         return R.layout.video_layout;
     }
 
-    /**
+    */
+/**
      * 显示wifi确定框
-     */
+     *//*
+
     @Override
     public void startPlayLogic() {
         if (mStandardVideoAllCallBack != null) {
@@ -136,9 +144,11 @@ public class PullVideoPlayer extends GSYVideoPlayer {
         startDismissControlViewTimer();
     }
 
-    /**
+    */
+/**
      * 显示wifi确定框，如需要自定义继承重写即可
-     */
+     *//*
+
     @Override
     protected void showWifiDialog() {
         if (!NetworkUtils.isAvailable(mContext)) {
@@ -165,9 +175,11 @@ public class PullVideoPlayer extends GSYVideoPlayer {
 
 
 
-    /**
+    */
+/**
      * 触摸显示滑动进度dialog，如需要自定义继承重写即可，记得重写dismissProgressDialog
-     */
+     *//*
+
     @Override
     @SuppressWarnings("ResourceType")
     protected void showProgressDialog(float deltaX, String seekTime, int seekTimePosition, String totalTime, int totalTimeDuration) {
@@ -179,12 +191,15 @@ public class PullVideoPlayer extends GSYVideoPlayer {
 
     }
 
-    /**
+    */
+/**
      * 触摸音量dialog，如需要自定义继承重写即可，记得重写dismissVolumeDialog
-     */
+     *//*
+
     @Override
     protected void showVolumeDialog(float deltaY, int volumePercent) {
-        /*if (mVolumeDialog == null) {
+        */
+/*if (mVolumeDialog == null) {
             View localView = LayoutInflater.from(getActivityContext()).inflate(R.layout.video_volume_dialog, null);
             mDialogVolumeProgressBar = ((ProgressBar) localView.findViewById(R.id.volume_progressbar));
             if (mVolumeProgressDrawable != null) {
@@ -210,24 +225,30 @@ public class PullVideoPlayer extends GSYVideoPlayer {
             mVolumeDialog.show();
         }
 
-        mDialogVolumeProgressBar.setProgress(volumePercent);*/
+        mDialogVolumeProgressBar.setProgress(volumePercent);*//*
+
     }
 
     @Override
     protected void dismissVolumeDialog() {
-       /* if (mVolumeDialog != null) {
+       */
+/* if (mVolumeDialog != null) {
             mVolumeDialog.dismiss();
             mVolumeDialog = null;
-        }*/
+        }*//*
+
     }
 
 
-    /**
+    */
+/**
      * 触摸亮度dialog，如需要自定义继承重写即可，记得重写dismissBrightnessDialog
-     */
+     *//*
+
     @Override
     protected void showBrightnessDialog(float percent) {
-       /* if (mBrightnessDialog == null) {
+       */
+/* if (mBrightnessDialog == null) {
             View localView = LayoutInflater.from(getActivityContext()).inflate(R.layout.video_brightness, null);
             mBrightnessDialogTv = (TextView) localView.findViewById(R.id.app_video_brightness);
             mBrightnessDialog = new Dialog(getActivityContext(), R.style.video_style_dialog_progress);
@@ -250,26 +271,31 @@ public class PullVideoPlayer extends GSYVideoPlayer {
             mBrightnessDialog.show();
         }
         if (mBrightnessDialogTv != null)
-            mBrightnessDialogTv.setText((int) (percent * 100) + "%");*/
+            mBrightnessDialogTv.setText((int) (percent * 100) + "%");*//*
+
     }
 
     @Override
     protected void dismissBrightnessDialog() {
-      /*  if (mBrightnessDialog != null) {
+      */
+/*  if (mBrightnessDialog != null) {
             mBrightnessDialog.dismiss();
             mBrightnessDialog = null;
-        }*/
+        }*//*
+
     }
 
 
-    /**
+    */
+/**
      * 将自定义的效果也设置到全屏
      *
      * @param context
      * @param actionBar 是否有actionBar，有的话需要隐藏
      * @param statusBar 是否有状态bar，有的话需要隐藏
      * @return
-     */
+     *//*
+
     @Override
     public GSYBaseVideoPlayer startWindowFullscreen(Context context, boolean actionBar, boolean statusBar) {
         GSYBaseVideoPlayer gsyBaseVideoPlayer = super.startWindowFullscreen(context, actionBar, statusBar);
@@ -284,11 +310,15 @@ public class PullVideoPlayer extends GSYVideoPlayer {
         return gsyBaseVideoPlayer;
     }
 
-    /********************************各类UI的状态显示*********************************************/
+    */
+/********************************各类UI的状态显示*********************************************//*
 
-    /**
+
+    */
+/**
      * 点击触摸显示和隐藏逻辑
-     */
+     *//*
+
     @Override
     protected void onClickUiToggle() {
         if (mIfCurrentIsFullscreen && mLockCurScreen && mNeedLockFull) {
@@ -561,9 +591,11 @@ public class PullVideoPlayer extends GSYVideoPlayer {
         updateStartImage();
     }
 
-    /**
+    */
+/**
      * 定义开始按键显示
-     */
+     *//*
+
     protected void updateStartImage() {
         if (mStartButton instanceof ENPlayView) {
             ENPlayView enPlayView = (ENPlayView) mStartButton;
@@ -587,9 +619,11 @@ public class PullVideoPlayer extends GSYVideoPlayer {
         }
     }
 
-    /**
+    */
+/**
      * 全屏的UI逻辑
-     */
+     *//*
+
     private void initFullUI(PullVideoPlayer pullVideoPlayer) {
 
         if (mBottomProgressDrawable != null) {
@@ -614,9 +648,11 @@ public class PullVideoPlayer extends GSYVideoPlayer {
         }
     }
 
-    /**
+    */
+/**
      * 底部进度条-弹出的
-     */
+     *//*
+
     public void setBottomShowProgressBarDrawable(Drawable drawable, Drawable thumb) {
         mBottomShowProgressDrawable = drawable;
         mBottomShowProgressThumbDrawable = thumb;
@@ -626,9 +662,11 @@ public class PullVideoPlayer extends GSYVideoPlayer {
         }
     }
 
-    /**
+    */
+/**
      * 底部进度条-非弹出
-     */
+     *//*
+
     public void setBottomProgressBarDrawable(Drawable drawable) {
         mBottomProgressDrawable = drawable;
         if (mBottomProgressBar != null) {
@@ -636,24 +674,30 @@ public class PullVideoPlayer extends GSYVideoPlayer {
         }
     }
 
-    /**
+    */
+/**
      * 声音进度条
-     */
+     *//*
+
     public void setDialogVolumeProgressBar(Drawable drawable) {
         mVolumeProgressDrawable = drawable;
     }
 
 
-    /**
+    */
+/**
      * 中间进度条
-     */
+     *//*
+
     public void setDialogProgressBar(Drawable drawable) {
         mDialogProgressBarDrawable = drawable;
     }
 
-    /**
+    */
+/**
      * 中间进度条字体颜色
-     */
+     *//*
+
     public void setDialogProgressColor(int highLightColor, int normalColor) {
         mDialogProgressHighLightColor = highLightColor;
         mDialogProgressNormalColor = normalColor;
@@ -665,38 +709,48 @@ public class PullVideoPlayer extends GSYVideoPlayer {
         setVideoAllCallBack(standardVideoAllCallBack);
     }
 
-    /************************************* 关于截图的 ****************************************/
+    */
+/************************************* 关于截图的 ****************************************//*
 
-    /**
+
+    */
+/**
      * 获取截图
-     */
+     *//*
+
     public void taskShotPic(GSYVideoShotListener gsyVideoShotListener) {
         this.taskShotPic(gsyVideoShotListener, false);
     }
 
-    /**
+    */
+/**
      * 获取截图
      *
      * @param high 是否需要高清的
-     */
+     *//*
+
     public void taskShotPic(GSYVideoShotListener gsyVideoShotListener, boolean high) {
         if (getCurrentPlayer().getRenderProxy() != null) {
             getCurrentPlayer().getRenderProxy().taskShotPic(gsyVideoShotListener, high);
         }
     }
 
-    /**
+    */
+/**
      * 保存截图
-     */
+     *//*
+
     public void saveFrame(final File file, GSYVideoShotSaveListener gsyVideoShotSaveListener) {
         saveFrame(file, false, gsyVideoShotSaveListener);
     }
 
-    /**
+    */
+/**
      * 保存截图
      *
      * @param high 是否需要高清的
-     */
+     *//*
+
     public void saveFrame(final File file, final boolean high, final GSYVideoShotSaveListener gsyVideoShotSaveListener) {
         if (getCurrentPlayer().getRenderProxy() != null) {
             getCurrentPlayer().getRenderProxy().saveFrame(file, high, gsyVideoShotSaveListener);
@@ -705,3 +759,4 @@ public class PullVideoPlayer extends GSYVideoPlayer {
 
 
 }
+*/

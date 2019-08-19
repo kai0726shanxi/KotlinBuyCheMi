@@ -39,7 +39,11 @@ class Constants private constructor() {
         val KEYNAME="key_name"//传值的名称
         val ANMATIONSHOWTIME=350L //动画执行的时间
         val IMGAEURL="image_url" //图片路径
+        val VIDEOURL="video_url" //视频路径
+        val DURATION="duration" //视频时长
         val CHOSEFORUM=1000 //选择论坛
         val SETADDRESS=1001 //设置地址
+
+        val CHOOSE_VIDEO = 1002//小视频回调
     }
 }

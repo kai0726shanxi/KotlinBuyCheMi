@@ -1,4 +1,4 @@
-package com.chmichat.chat.ui.activity
+package com.chmichat.chat.ui.activity.add
 
 import android.app.Activity
 import android.content.Intent
@@ -7,7 +7,6 @@ import android.view.View
 import com.chmichat.chat.Constants
 import com.chmichat.chat.R
 import com.chmichat.chat.base.BaseActivity
-import com.chmichat.chat.ui.activity.add.ReleaseImageTextActivity
 import com.chmichat.chat.utils.StatusBarUtil
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureConfig
@@ -47,7 +46,7 @@ class HomeAddActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when {
             v?.id == R.id.tv_add_imgtxt -> {
-               //图文
+                //图文
                 openpicture()
             }
             v?.id == R.id.tv_add_tie -> {
@@ -55,10 +54,11 @@ class HomeAddActivity : BaseActivity(), View.OnClickListener {
 
             }
             v?.id == R.id.tv_add_video -> {
-             //小视频
+                //小视频
+                openvideo()
             }
             v?.id == R.id.tv_add_longvideo -> {
-           //长视频
+                //长视频
             }
             v?.id == R.id.iv_delete -> {
                 //删除
@@ -70,7 +70,19 @@ class HomeAddActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
-    private fun  openpicture(){
+    private fun openvideo() {
+        //打开小视频
+        PictureSelector.create(this)
+                .openGallery(PictureMimeType.ofVideo())
+                .compress(true)// 是否压缩 true or
+                .videoQuality(0)// 视频录制质量  0 or 1 int
+                .recordVideoSecond(15)//视频秒数录制 默认60s int
+                .videoMaxSecond(16)// 显示多少秒以内的视频or音频也可适用 int
+                .forResult(Constants.CHOOSE_VIDEO)
+
+    }
+
+    private fun openpicture() {
         PictureSelector.create(this)
                 .openGallery(PictureMimeType.ofImage())
                 .enableCrop(true)// 是否裁剪 true or false
@@ -94,12 +106,23 @@ class HomeAddActivity : BaseActivity(), View.OnClickListener {
                     // 3.media.getCompressPath();为压缩后path，需判断media.isCompressed();是否为true  注意：音视频除外
                     // 如果裁剪并压缩了，以取压缩路径为准，因为是先裁剪后压缩的
 
-                    Log.e("测试》》",selectList[0].compressPath)
-                    val intent=Intent(this,ReleaseImageTextActivity::class.java)
-                    intent.putExtra(Constants.IMGAEURL,selectList[0].compressPath)
+                    val intent = Intent(this, ReleaseImageTextActivity::class.java)
+                    intent.putExtra(Constants.IMGAEURL, selectList[0].compressPath)
                     startActivity(intent)
                     finish()
 
+                }
+
+                Constants.CHOOSE_VIDEO -> {
+                    val selectList = PictureSelector.obtainMultipleResult(data)
+                    Log.e("测试》》", selectList[0].path+">>"+selectList[0].duration)
+
+                    val intent = Intent(this, ReleaseVideoActivity::class.java)
+                    intent.putExtra(Constants.VIDEOURL, selectList[0].path)
+                    intent.putExtra(Constants.DURATION, selectList[0].duration)
+
+                    startActivity(intent)
+                    finish()
                 }
             }
         }

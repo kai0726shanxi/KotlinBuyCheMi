@@ -1,7 +1,11 @@
 package com.chmichat.chat.ui.adapter.homeadapter
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.view.View
 import com.chmichat.chat.R
+import com.chmichat.chat.ui.activity.home.ActivityProjectActivity
 import com.chmichat.chat.view.recyclerview.ViewHolder
 import com.chmichat.chat.view.recyclerview.adapter.CommonAdapter
 
@@ -14,6 +18,9 @@ class HomeImageTextAdapter(context: Context, data: ArrayList<String>): CommonAda
 
 
     override fun bindData(holder: ViewHolder, data: String, position: Int) {
-
+        holder.setOnItemClickListener(View.OnClickListener {
+            val intent = Intent(mContext as Activity, ActivityProjectActivity::class.java)
+            mContext.startActivity(intent)
+        })
     }
 }

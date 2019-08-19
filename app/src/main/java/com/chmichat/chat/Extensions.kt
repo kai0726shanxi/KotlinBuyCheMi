@@ -2,6 +2,7 @@ package com.chmichat.chat
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.Bitmap
 import android.support.v4.app.Fragment
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -9,6 +10,9 @@ import android.widget.Toast
 import com.chmichat.chat.net.BaseResponse
 import com.chmichat.chat.net.exception.ApiException
 import io.reactivex.Observable
+import android.media.MediaMetadataRetriever
+
+
 
 /**
  * Created by xuhao on 2017/11/14.
@@ -47,19 +51,20 @@ fun View.px2dip(pxValue: Float): Int {
 }
 
 fun durationFormat(duration: Long?): String {
+
     val minute = duration!! / 60
     val second = duration % 60
     return if (minute <= 9) {
         if (second <= 9) {
-            "0$minute' 0$second''"
+            "0$minute : 0$second"
         } else {
-            "0$minute' $second''"
+            "0$minute : $second"
         }
     } else {
         if (second <= 9) {
-            "$minute' 0$second''"
+            "$minute : 0$second"
         } else {
-            "$minute' $second''"
+            "$minute ： $second"
         }
     }
 }
@@ -78,6 +83,22 @@ fun Context.dataFormat(total: Long): String {
     }
     return result
 }
+
+/**
+ * 获取本地视频第一帧
+ */
+fun Context.GetVieoImage(string: String?): Bitmap? {
+    try {
+        val media = MediaMetadataRetriever()
+        media.setDataSource(string)
+        return media.getFrameAtTime(1, MediaMetadataRetriever.OPTION_CLOSEST_SYNC)
+    } catch (ex: IllegalArgumentException) {
+        ex.printStackTrace()
+    }
+ return null
+}
+
+
 //根据code判断返回的数据
 fun <T> Observable<BaseResponse<T>>.dispatchDefault(): Observable<BaseResponse<T>> =
         this.flatMap { tBaseModel ->

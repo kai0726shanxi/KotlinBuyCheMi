@@ -1,11 +1,14 @@
 package com.chmichat.chat.ui.adapter.homeadapter
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.graphics.Typeface
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.chmichat.chat.R
+import com.chmichat.chat.ui.activity.home.PlayVideoActivity
 import com.chmichat.chat.view.recyclerview.ViewHolder
 import com.chmichat.chat.view.recyclerview.adapter.CommonAdapter
 
@@ -36,6 +39,13 @@ class HomeClassifyAdapter(context: Context, data: ArrayList<String>)
         val tv=holder.getView<TextView>(R.id.tv_name)
            tv.typeface=mTextface
         tv.setText("进口评论"+position)
+        holder.setOnItemClickListener(object :View.OnClickListener{
+            override fun onClick(p0: View?) {
+                val intent = Intent(mContext as Activity, PlayVideoActivity::class.java)
+                mContext.startActivity(intent)
+            }
+
+        })
 
 
     }

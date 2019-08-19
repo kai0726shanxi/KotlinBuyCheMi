@@ -1,11 +1,14 @@
+/*
 package com.chmichat.chat.view
 
 import com.shuyu.gsyvideoplayer.listener.StandardVideoAllCallBack
 
+*/
 /**
  * Created by xuhao on 2017/11/27.
  * desc: VideoAllCallBack 回调
- */
+ *//*
+
 interface VideoListener : StandardVideoAllCallBack {
 
     //加载成功，objects[0]是title，object[1]是当前所处播放器（全屏或非全屏）
@@ -112,4 +115,4 @@ interface VideoListener : StandardVideoAllCallBack {
     override fun onClickBlankFullscreen(url: String, vararg objects: Any) {
 
     }
-}
+}*/

@@ -119,8 +119,7 @@ dependencies {
     implementation 'com.bigkoo:convenientbanner:2.0.5'
 
     // 视屏播放器
-    implementation 'com.shuyu:GSYVideoPlayer:2.1.1'
-    //Logger
+    implementation 'com.shuyu:GSYVideoPlayer:6.0.3'
     implementation 'com.orhanobut:logger:2.1.1'
     //Google开源的一个布局控件
     implementation 'com.google.android:flexbox:0.3.1'
