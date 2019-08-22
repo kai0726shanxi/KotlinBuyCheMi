@@ -15,11 +15,12 @@ import kotlinx.android.synthetic.main.title_bar_layout.*
  * @Author 20342
  * @Date 2019/8/5 11:41
  */
-class MessageListFragment : BaseFragment(),View.OnClickListener {
+class MessageListFragment : BaseFragment(), View.OnClickListener {
 
 
-    private var mMessageListAdapter: MessageListAdapter?=null
-    var mlist= arrayListOf("1","2","w","w")
+    private var mMessageListAdapter: MessageListAdapter? = null
+    var mlist = arrayListOf("系统消息", "互动消息", "活动消息", "系统消息")
+
     companion object {
         fun getInstance(): MessageListFragment {
             val fragment = MessageListFragment()
@@ -33,23 +34,20 @@ class MessageListFragment : BaseFragment(),View.OnClickListener {
 
     override fun initView() {
         //状态栏透明和间距处理
-        mMessageListAdapter=activity?.let { MessageListAdapter(it,mlist) }
+        mMessageListAdapter = activity?.let { MessageListAdapter(it, mlist) }
         activity?.let { StatusBarUtil.darkMode(it) }
         activity?.let { StatusBarUtil.setPaddingSmart(it, cl_bar) }
-        recycle_view.adapter=mMessageListAdapter
-        recycle_view.layoutManager=LinearLayoutManager(activity)
-        iv_left.visibility=View.VISIBLE
-        iv_left.setColorFilter(Color.BLACK)
-        iv_left.setOnClickListener(this)
-        tv_title.text="通知"
+        recycle_view.adapter = mMessageListAdapter
+        recycle_view.layoutManager = LinearLayoutManager(activity)
+        tv_title.text = "通知"
     }
+
     override fun onClick(v: View?) {
-      when(v?.id) {
-          R.id.iv_left->{
-              activity?.finish()
-          }
-      }
+        when (v?.id) {
+
+        }
     }
+
     override fun lazyLoad() {
     }
 }

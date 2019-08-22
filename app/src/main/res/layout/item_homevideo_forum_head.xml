@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_bg_message"
+    android:layout_width="wrap_content"
+    android:layout_marginLeft="@dimen/dp_m_2"
+    android:layout_height="wrap_content"
+   >
+
+    <com.chmichat.chat.view.CircleImageView
+        android:id="@+id/iv_head"
+        android:layout_width="@dimen/dp_16"
+        android:layout_height="@dimen/dp_16"
+        android:src="@mipmap/test_dis_b"
+        app:type="circle"/>
+</android.support.constraint.ConstraintLayout>

@@ -11,21 +11,29 @@ import com.chmichat.chat.view.recyclerview.adapter.CommonAdapter
  * @Author 20342
  * @Date 2019/8/8 15:37
  */
-class DiscoverContentAdapter(context: Context, data: ArrayList<String>) : CommonAdapter<String>(context, data, object : MultipleType<String> {
+class DiscoverContentAdapter(context: Context, data: ArrayList<String>,p:String) : CommonAdapter<String>(context, data, object : MultipleType<String> {
+
     override fun getLayoutId(item: String, position: Int): Int {
         return when {
-            position == 0 ->
-                R.layout.item_discover_content_big
-            else ->
+            p == "0"->
                 R.layout.item_discover_content_small
+            p == "1" ->
+                R.layout.item_discover_content_big
+            p == "2" ->
+                R.layout.item_mevideo_layout
+            p == "3"->
+                R.layout.item_melongvideo_layout
+            else -> {
+                R.layout.item_discover_content_small
+            }
         }
     }
 }) {
     override fun bindData(holder: ViewHolder, data: String, position: Int) {
-        if (position==3){
-            holder.setViewVisibility(R.id.img_content,View.GONE)
-        }
 
+      holder.setOnItemClickListener(listener = View.OnClickListener {
+
+      })
     }
 
 }

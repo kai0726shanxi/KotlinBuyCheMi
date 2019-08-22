@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.activity.home.AllDynamicActivity">
+
+    <include layout="@layout/title_bar_layout" />
+
+    <ImageView
+        android:id="@+id/iv_head"
+        android:layout_width="@dimen/dp_52"
+        android:layout_height="@dimen/dp_52"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_5"
+        android:src="@mipmap/test_re_ic"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cl_bar" />
+
+    <TextView
+        android:id="@+id/tv_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:text="热门动态"
+        android:textColor="@color/black_ivory"
+        android:textSize="@dimen/dp_18"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@+id/iv_head"
+        app:layout_constraintTop_toTopOf="@+id/iv_head" />
+
+    <TextView
+        android:id="@+id/tv_read"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:text="阅读 1000  |  帖子 2600"
+        android:textColor="@color/black_text"
+        android:textSize="@dimen/dp_12"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_tag"
+        app:layout_constraintTop_toBottomOf="@+id/tv_tag" />
+
+    <TextView
+        android:id="@+id/tv_collect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/dp_25"
+        android:text="收藏"
+        android:textColor="@color/displayt"
+        android:textSize="@dimen/sp_12"
+        android:drawableTop="@mipmap/dynamic_cang_no"
+        android:drawablePadding="@dimen/dp_10"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_head"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <View
+        android:id="@+id/v_line"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_15"
+        android:background="@color/home_bg"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_head" />
+
+    <com.chmichat.chat.view.MySlidingTabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="48dp"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/white"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/v_line"
+        app:tl_indicator_color="@color/displaynomal"
+        app:tl_indicator_corner_radius="2dp"
+        app:tl_indicator_height="@dimen/dp_2"
+        app:tl_indicator_width_equal_title="true"
+        app:tl_tab_padding="@dimen/dp_15"
+        app:tl_textBold="SELECT"
+        app:tl_textSelectColor="@color/black_ivory"
+        app:tl_textUnselectColor="@color/displayt"
+        app:tl_underline_color="@color/home_bg"
+        app:tl_underline_height="@dimen/dp_1" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/mViewPager"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tab_layout" />
+</android.support.constraint.ConstraintLayout>

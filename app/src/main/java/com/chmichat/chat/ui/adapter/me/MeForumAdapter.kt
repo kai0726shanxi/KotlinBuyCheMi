@@ -1,7 +1,11 @@
 package com.chmichat.chat.ui.adapter.me
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.view.View
 import com.chmichat.chat.R
+import com.chmichat.chat.ui.activity.home.AllDynamicActivity
 import com.chmichat.chat.view.recyclerview.ViewHolder
 import com.chmichat.chat.view.recyclerview.adapter.CommonAdapter
 
@@ -12,5 +16,9 @@ import com.chmichat.chat.view.recyclerview.adapter.CommonAdapter
  */
 class MeForumAdapter(context: Context, data:ArrayList<String>):CommonAdapter<String>(context,data, R.layout.item_meforum_layout){
     override fun bindData(holder: ViewHolder, data: String, position: Int) {
+        holder.setOnItemClickListener(View.OnClickListener {
+            val intent = Intent(mContext as Activity, AllDynamicActivity::class.java)
+            mContext.startActivity(intent)
+        })
     }
 }

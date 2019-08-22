@@ -36,7 +36,11 @@ class ReleaseVideoActivity : BaseActivity(), View.OnClickListener {
     private var mProject: ReleaseVideoAdapter? = null//产品
     private var mArt: ReleaseVideoAdapter? = null//技术
     private var mCommon: ReleaseVideoAdapter? = null//常识
+    private var isProject:Boolean=false
+    private var isArt:Boolean=false
+    private var isCommon:Boolean=false
     var mRecycle:ReleaseVideoActivity?=null
+
 
     override fun layoutId(): Int {
         return R.layout.activity_release_video
@@ -59,6 +63,8 @@ class ReleaseVideoActivity : BaseActivity(), View.OnClickListener {
         tv_classify_content.setOnClickListener(this)
         tv_address_content.setOnClickListener(this)
         iv_left.setOnClickListener(this)
+        tv_cancel.setOnClickListener(this)
+        tv_affirm.setOnClickListener(this)
         iv_left.visibility = View.VISIBLE
         iv_left.setColorFilter(Color.BLACK)
         tv_title.text = "发布"
@@ -134,8 +140,66 @@ class ReleaseVideoActivity : BaseActivity(), View.OnClickListener {
         })
 
         mProject = ReleaseVideoAdapter(this, mlist)
+        mProject!!.setOnTagItemClickListener { tag, pos ->
+            if (!isProject){
+                isProject=true
+            }
+
+            if (isArt){
+                mArt!!.btnPosition=-1
+                mArt!!.notifyDataSetChanged()
+            }
+            if (isCommon){
+                mCommon!!.btnPosition=-1
+                mCommon!!.notifyDataSetChanged()
+            }
+
+            mProject!!.btnPosition=pos
+            mProject!!.notifyDataSetChanged()
+        }
+        mArt= ReleaseVideoAdapter(this,mlist)
+        mArt!!.setOnTagItemClickListener { tag, pos ->
+            if (!isArt){
+                isArt=true
+            }
+            if (isCommon){
+                mCommon!!.btnPosition=-1
+                mCommon!!.notifyDataSetChanged()
+            }
+            if (isProject){
+                mProject!!.btnPosition=-1
+                mProject!!.notifyDataSetChanged()
+            }
+            mArt!!.btnPosition=pos
+            mArt!!.notifyDataSetChanged()
+        }
+
+        mCommon= ReleaseVideoAdapter(this,mlist)
+        mCommon!!.setOnTagItemClickListener { tag, pos ->
+            if (!isCommon){
+                isCommon=true
+            }
+
+            mCommon!!.btnPosition=pos
+            mCommon!!.notifyDataSetChanged()
+
+        if (isProject){
+            mProject!!.btnPosition=-1
+            mProject!!.notifyDataSetChanged()
+        }
+        if (isArt){
+            mArt!!.btnPosition=-1
+            mArt!!.notifyDataSetChanged()
+        }
+        }
         recycle_project.adapter = mProject
         recycle_project.layoutManager=setFlexboxLayout()
+        recycle_art.adapter=mArt
+        recycle_art.layoutManager=setFlexboxLayout()
+
+        recycle_common.adapter=mCommon
+        recycle_common.layoutManager=setFlexboxLayout()
+
 
 
     }
@@ -148,6 +212,16 @@ class ReleaseVideoActivity : BaseActivity(), View.OnClickListener {
             }
             R.id.tv_address_content -> {
                 startActivityForResult(Intent(this, SetAddressActivity::class.java), Constants.SETADDRESS)
+
+            }
+            R.id.tv_cancel->{
+                mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                mDrawerLayout.closeDrawer(Gravity.END)
+
+            }
+            R.id.tv_affirm->{
+                mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                mDrawerLayout.closeDrawer(Gravity.END)
 
             }
         }
