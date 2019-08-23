@@ -112,7 +112,7 @@
         android:layout_marginRight="@dimen/dp_10"
         android:layout_marginLeft="@dimen/dp_5"
         android:background="@drawable/bg_input_gray_shap"
-        android:drawableRight="@mipmap/search_icon"
+        android:drawableLeft="@mipmap/search_icon"
         android:hint="请输入内容"
         android:singleLine="true"
         android:textColorHint="#ff8e8e93"

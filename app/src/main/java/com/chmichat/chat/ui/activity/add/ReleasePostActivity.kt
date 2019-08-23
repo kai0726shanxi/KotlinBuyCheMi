@@ -2,6 +2,8 @@ package com.chmichat.chat.ui.activity.add
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
+import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.view.View
 import com.chmichat.chat.Constants
@@ -11,19 +13,18 @@ import com.chmichat.chat.utils.StatusBarUtil
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureConfig
 import com.luck.picture.lib.config.PictureMimeType
-import kotlinx.android.synthetic.main.activity_home_add.*
+import kotlinx.android.synthetic.main.activity_release_post.*
+import kotlinx.android.synthetic.main.title_bar_layout.*
 
 /**
- * 首页添加
+ * 发帖
  * @Author 20342
- * @Date 2019/8/12 14:43
+ * @Date 2019/8/23 16:41
  */
-class HomeAddActivity : BaseActivity(), View.OnClickListener {
-
+class ReleasePostActivity : BaseActivity(), View.OnClickListener {
 
     override fun layoutId(): Int {
-
-        return R.layout.activity_home_add
+        return R.layout.activity_release_post
     }
 
     override fun initData() {
@@ -31,54 +32,44 @@ class HomeAddActivity : BaseActivity(), View.OnClickListener {
 
     override fun initView() {
         StatusBarUtil.darkMode(this)
-        tv_add_imgtxt.setOnClickListener(this)
-        tv_add_longvideo.setOnClickListener(this)
-        tv_add_video.setOnClickListener(this)
-        tv_add_tie.setOnClickListener(this)
-        iv_delete.setOnClickListener(this)
+        StatusBarUtil.setPaddingSmart(this, cl_bar)
+        iv_left.setOnClickListener(this)
+        iv_icon.setOnClickListener(this)
+        iv_pic.setOnClickListener(this)
+        iv_address.setOnClickListener(this)
+        iv_classify.setOnClickListener(this)
+
+        iv_left.visibility = View.VISIBLE
+        iv_left.setColorFilter(Color.BLACK)
+        tv_title.text = "发帖"
+        tv_right.visibility = View.VISIBLE
+        tv_right.text = "发布"
+        tv_right.setTextColor(ContextCompat.getColor(this, R.color.displaynomal))
 
     }
 
     override fun start() {
     }
 
-
     override fun onClick(v: View?) {
-        when {
-            v?.id == R.id.tv_add_imgtxt -> {
-                //图文
+        when (v?.id) {
+            R.id.iv_left -> finish()
+            R.id.iv_icon -> {
+                //图标
+
+            }
+            R.id.iv_pic -> {
+                //照片
                 openpicture()
             }
-            v?.id == R.id.tv_add_tie -> {
-                //帖子
-                  startActivity(Intent(this,ReleasePostActivity::class.java))
-            }
-            v?.id == R.id.tv_add_video -> {
-                //小视频
-                openvideo()
-            }
-            v?.id == R.id.tv_add_longvideo -> {
-                //长视频
-            }
-            v?.id == R.id.iv_delete -> {
-                //删除
-                finish()
 
+            R.id.iv_classify -> {
+                //分类
             }
-
-
+            R.id.iv_address -> {
+                //地址
+            }
         }
-    }
-
-    private fun openvideo() {
-        //打开小视频
-        PictureSelector.create(this)
-                .openGallery(PictureMimeType.ofVideo())
-                .compress(true)// 是否压缩 true or
-                .videoQuality(0)// 视频录制质量  0 or 1 int
-                .recordVideoSecond(15)//视频秒数录制 默认60s int
-                .videoMaxSecond(16)// 显示多少秒以内的视频or音频也可适用 int
-                .forResult(Constants.CHOOSE_VIDEO)
 
     }
 
@@ -87,9 +78,10 @@ class HomeAddActivity : BaseActivity(), View.OnClickListener {
                 .openGallery(PictureMimeType.ofImage())
                 .enableCrop(true)// 是否裁剪 true or false
                 .compress(true)// 是否压缩 true or
+                .maxSelectNum(6)
                 .showCropFrame(true)// 是否显示裁剪矩形边框 圆形裁剪时建议设为false   true or false
                 .showCropGrid(false)// 是否显示裁剪矩形网格 圆形裁剪时建议设为false    true or false
-                .selectionMode(PictureConfig.SINGLE)// 多选 or 单选 PictureConfig.MULTIPLE or PictureConfig.SINGLE
+                .selectionMode(PictureConfig.MULTIPLE)// 多选 or 单选 PictureConfig.MULTIPLE or PictureConfig.SINGLE
                 .forResult(PictureConfig.CHOOSE_REQUEST)
     }
 
@@ -113,18 +105,9 @@ class HomeAddActivity : BaseActivity(), View.OnClickListener {
 
                 }
 
-                Constants.CHOOSE_VIDEO -> {
-                    val selectList = PictureSelector.obtainMultipleResult(data)
-                    Log.e("测试》》", selectList[0].path+">>"+selectList[0].duration)
 
-                    val intent = Intent(this, ReleaseVideoActivity::class.java)
-                    intent.putExtra(Constants.VIDEOURL, selectList[0].path)
-                    intent.putExtra(Constants.DURATION, selectList[0].duration)
-
-                    startActivity(intent)
-                    finish()
-                }
             }
         }
     }
+
 }

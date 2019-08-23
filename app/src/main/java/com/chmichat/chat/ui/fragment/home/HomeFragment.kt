@@ -1,6 +1,7 @@
 package com.chmichat.chat.ui.fragment.home
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.FragmentTransaction
 import android.support.v4.content.ContextCompat
@@ -9,6 +10,7 @@ import com.chmichat.chat.App
 import com.chmichat.chat.R
 import com.chmichat.chat.base.BaseFragment
 import com.chmichat.chat.showToast
+import com.chmichat.chat.ui.activity.home.SearchForumActivity
 import com.chmichat.chat.utils.StatusBarUtil
 import kotlinx.android.synthetic.main.fragment_home_layout.*
 
@@ -86,8 +88,8 @@ class HomeFragment : BaseFragment(), View.OnClickListener {
 
 
             }
-            v?.id==R.id.iv_search->{
-                showToast("点击搜索")
+              v?.id==R.id.iv_search->{
+                 startActivity(Intent(activity,SearchForumActivity::class.java))
             }
 
         }

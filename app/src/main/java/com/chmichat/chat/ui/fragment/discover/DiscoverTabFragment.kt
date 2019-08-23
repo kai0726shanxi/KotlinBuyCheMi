@@ -2,7 +2,6 @@ package com.chmichat.chat.ui.fragment.discover
 
 import android.support.v4.app.Fragment
 import android.os.Bundle
-import android.widget.FrameLayout
 import com.chmichat.chat.R
 import com.chmichat.chat.base.BaseFragment
 import com.chmichat.chat.base.BaseFragmentAdapter
@@ -43,6 +42,7 @@ class DiscoverTabFragment : BaseFragment() {
 
             mFragmentList.add(DiscoverRecycleVIewFragment.getInstance("$index"))
         }
+        mViewPager.setScroll(true)
         mViewPager.adapter = BaseFragmentAdapter(childFragmentManager, mFragmentList, mTitles)
         tab_layout.setViewPager(mViewPager)
     }
