@@ -13,15 +13,17 @@ import kotlinx.android.synthetic.main.fragment_tab_discover.*
  */
 class DiscoverTabFragment : BaseFragment() {
     private var mPosition = ""
-    private var mTitles = arrayListOf("图文", "帖子", "小视频", "VLOG")
+    private var mid=0
+    private var mTitles = arrayListOf( "帖子", "小视频", "VLOG")
     private var mFragmentList = ArrayList<Fragment>()
 
     companion object {
-        fun getInstance(pos: String): DiscoverTabFragment {
+        fun getInstance(pos: String,forumId:Int): DiscoverTabFragment {
             val fragment = DiscoverTabFragment()
             val bundle = Bundle()
             fragment.arguments = bundle
             fragment.mPosition = pos
+            fragment.mid=forumId
             return fragment
         }
     }
@@ -40,7 +42,7 @@ class DiscoverTabFragment : BaseFragment() {
         tab_layout.minTxtSize=14
         for (index in mTitles.indices) {
 
-            mFragmentList.add(DiscoverRecycleVIewFragment.getInstance("$index"))
+            mFragmentList.add(DiscoverRecycleVIewFragment.getInstance("$index",mid))
         }
         mViewPager.setScroll(true)
         mViewPager.adapter = BaseFragmentAdapter(childFragmentManager, mFragmentList, mTitles)

@@ -22,14 +22,14 @@ class BaseFragmentAdapter : FragmentPagerAdapter {
         this.fragmentList = fragmentList
     }
 
-    constructor(fm: FragmentManager, fragmentList: List<Fragment>, mTitles: List<String>) : super(fm) {
+    constructor(fm: FragmentManager, fragmentList: List<Fragment>?, mTitles: List<String>) : super(fm) {
         this.mTitles = mTitles
         setFragments(fm, fragmentList, mTitles)
     }
 
     //刷新fragment
     @SuppressLint("CommitTransaction")
-    private fun setFragments(fm: FragmentManager, fragments: List<Fragment>, mTitles: List<String>) {
+    private fun setFragments(fm: FragmentManager, fragments: List<Fragment>?, mTitles: List<String>) {
         this.mTitles = mTitles
         if (this.fragmentList != null) {
             val ft = fm.beginTransaction()

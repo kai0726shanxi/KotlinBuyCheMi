@@ -1,11 +1,11 @@
 package com.chmichat.chat.api
 
 /**
- * Created by xuhao on 2017/11/16.
+ * Created by 203442 on 2019/9/2
  */
 object UrlConstant{
-    const val BASE_URL = "http://baobab.kaiyanapp.com/api/"
-    //const val BASE_URL = "https://blh-cloud.buychemi.com/"
+    const val BASE_URL = "http://blh-cloud-test.buychemi.com/"
+    const val BASE_URL_IMAGE="https://file-blh.buychemi.com/file/bbs/user/tempHead/"
 
 
 }

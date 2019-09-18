@@ -16,7 +16,7 @@
        app:layout_constraintLeft_toLeftOf="parent"
        app:layout_constraintRight_toRightOf="parent"
        app:layout_constraintTop_toTopOf="parent"
-       android:text="测试"
+       android:text=""
       />
     <View
         android:layout_width="@dimen/dp_0"

@@ -3,11 +3,14 @@ package com.chmichat.chat.ui.activity.add
 import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.View
+import com.chmichat.chat.Constants
 import com.chmichat.chat.R
 import com.chmichat.chat.base.BaseActivity
 import com.chmichat.chat.base.BaseFragmentAdapter
+import com.chmichat.chat.bean.PostListEntity
 import com.chmichat.chat.ui.fragment.home.HomeCommentFragment
 import com.chmichat.chat.ui.fragment.home.HomeIntroductionFragment
+import com.chmichat.chat.utils.StatusBarUtil
 import com.dueeeke.videocontroller.StandardVideoController
 import com.dueeeke.videoplayer.listener.OnVideoViewStateChangeListener
 import com.dueeeke.videoplayer.player.VideoView
@@ -23,27 +26,32 @@ class ReleaseLongVideoActivity : BaseActivity(), View.OnClickListener {
 
 
     private val mTitles = arrayListOf("简介", "评论")
-    private var mFragments = arrayListOf<Fragment>(HomeIntroductionFragment.getInstance(), HomeCommentFragment.getInstance())
+    private var mPostListEntity: PostListEntity?=null
+    private var mFragments :ArrayList<Fragment>?= ArrayList()
     override fun layoutId(): Int {
 
         return R.layout.activity_release_long_video
     }
 
     override fun initData() {
+        mPostListEntity= intent.getSerializableExtra(Constants.PLAYLIST) as PostListEntity?
     }
 
     override fun initView() {
-        mViewPager.adapter = BaseFragmentAdapter(supportFragmentManager, mFragments, mTitles)
 
+        mFragments?.add(HomeIntroductionFragment.getInstance())
+        mFragments?.add(HomeCommentFragment.getInstance(mPostListEntity?.id))
+        mViewPager.adapter = BaseFragmentAdapter(supportFragmentManager, mFragments, mTitles)
         tab_layout.setViewPager(mViewPager)
         tab_layout.showMsg(1, 22)
         iv_left.setOnClickListener(this)
         iv_playm.setOnClickListener(this)
+
         val controller = StandardVideoController(this)
-        controller.setTitle("测试标题")
+        controller.setTitle(mPostListEntity?.postTitle)
         player.setVideoController(controller)
         player.replay(false)
-        player.setUrl("http://vfx.mtime.cn/Video/2019/03/12/mp4/190312143927981075.mp4")
+        player.setUrl(mPostListEntity?.videoUrl)
         //   player.setUrl("http://ivi.bupt.edu.cn/hls/cctv6hd.m3u8")
         player.setOnVideoViewStateChangeListener(object : OnVideoViewStateChangeListener {
             override fun onPlayStateChanged(playState: Int) {

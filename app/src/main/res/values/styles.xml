@@ -11,7 +11,15 @@
 
 
     </style>
-
+    <style name="ItemStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:gravity">top</item>
+        <item name="android:hint">请输入内容</item>
+    </style>
     <style name="AppTheme.NoActionBar">
         <item name="colorAccent">@color/displaynomal</item>
         <item name="windowActionBar">false</item>

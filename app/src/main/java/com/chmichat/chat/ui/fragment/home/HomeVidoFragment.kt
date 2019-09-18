@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_home_video.*
 class HomeVidoFragment : BaseFragment() {
 
     private val mTitles = arrayListOf("精选", "小视频", "VLOG")
-    private var mFragments = arrayListOf<Fragment>(MeTabFragment.getInstance("1"), MeTabFragment.getInstance("1"), MeTabFragment.getInstance("2"))
+    private var mFragments = arrayListOf<Fragment>(MeTabFragment.getInstance("0","1"), MeTabFragment.getInstance("1","1"), MeTabFragment.getInstance("2","1"))
 
     companion object {
         fun getInstance(): HomeVidoFragment {

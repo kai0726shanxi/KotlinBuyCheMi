@@ -1,15 +1,19 @@
 package com.chmichat.chat.ui.activity.home
 
 import android.support.v7.widget.OrientationHelper
+import android.text.Html
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import com.chmichat.chat.Constants
 import com.chmichat.chat.R
 import com.chmichat.chat.base.BaseActivity
+import com.chmichat.chat.bean.PostListEntity
 import com.chmichat.chat.glide.GlideApp
 import com.chmichat.chat.showToast
 import com.chmichat.chat.ui.adapter.homeadapter.PlayVideoAdapter
+import com.chmichat.chat.ui.dialog.VideoCommentDialog
 import com.chmichat.chat.view.layoutmanagergroup.viewpager.OnViewPagerListener
 import com.chmichat.chat.view.layoutmanagergroup.viewpager.ViewPagerLayoutManager
 import kotlinx.android.synthetic.main.activity_playvideo.*
@@ -28,17 +32,21 @@ class PlayVideoActivity : BaseActivity(), View.OnClickListener {
 
     private var mPlayVideoAdapter: PlayVideoAdapter? = null
     private var mLayoutManager: ViewPagerLayoutManager? = null
-    private var isplaying: Boolean? = null
+    private var isplaying: Boolean = false
     private var mVideoView: VideoView? = null
     private var mTikTokController: VideoViewController? = null
     private var mCurrentPosition: Int = 0
-    private var mlist = arrayListOf("1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1")
+    private var mivPlay: ImageView? = null
+    private var mPlayPosition: Int = 0
+    private var mlist = ArrayList<PostListEntity>()
     override fun layoutId(): Int {
 
         return R.layout.activity_playvideo
     }
 
     override fun initData() {
+        mPlayPosition = intent.getIntExtra(Constants.PLAYPOSITION, 0)
+        mlist = intent.getSerializableExtra(Constants.PLAYLIST) as ArrayList<PostListEntity>
     }
 
     override fun initView() {
@@ -50,7 +58,9 @@ class PlayVideoActivity : BaseActivity(), View.OnClickListener {
         mPlayVideoAdapter = PlayVideoAdapter(this, mlist)
         recycle_view.adapter = mPlayVideoAdapter
         mLayoutManager = ViewPagerLayoutManager(this, OrientationHelper.VERTICAL)
+
         recycle_view.layoutManager = mLayoutManager
+        recycle_view.scrollToPosition(mPlayPosition)
         initListener()
 
     }
@@ -62,11 +72,18 @@ class PlayVideoActivity : BaseActivity(), View.OnClickListener {
 
             override fun onInitComplete() {
                 //自动播放第一条
-                startPlay(0)
+                startPlay(mPlayPosition)
             }
 
             override fun onPageRelease(isNext: Boolean, position: Int) {
                 if (mCurrentPosition == position) {
+                    if (isplaying) {
+                        isplaying = !isplaying
+                        if (mivPlay != null) {
+                            mivPlay?.visibility = View.GONE
+                        }
+
+                    }
                     mVideoView!!.release()
                 }
 
@@ -91,6 +108,7 @@ class PlayVideoActivity : BaseActivity(), View.OnClickListener {
     override fun start() {
     }
 
+
     private fun startPlay(position: Int) {
         val itemView = recycle_view.getChildAt(0)
         val frameLayout = itemView.findViewById<FrameLayout>(R.id.container)
@@ -100,17 +118,26 @@ class PlayVideoActivity : BaseActivity(), View.OnClickListener {
         val mhead = itemView.findViewById<CircleImageView>(R.id.iv_head)
         val mivshare = itemView.findViewById<ImageView>(R.id.iv_share)
         val mivleft = itemView.findViewById<ImageView>(R.id.iv_left)
+        val viewBg = itemView.findViewById<View>(R.id.view_bg)
+        val maddress = itemView.findViewById<TextView>(R.id.tv_address)
+        val mName = itemView.findViewById<TextView>(R.id.tv_name)
+        val mcontent = itemView.findViewById<TextView>(R.id.tv_content)
+        mivPlay = itemView.findViewById<ImageView>(R.id.iv_play)
         mcollect.setOnClickListener(this)
         mcomment.setOnClickListener(this)
         mlike.setOnClickListener(this)
         mhead.setOnClickListener(this)
         mivshare.setOnClickListener(this)
         mivleft.setOnClickListener(this)
+        viewBg.setOnClickListener(this)
 
 
+        maddress.text=mlist[position].position
+        mName.text=mlist[position].userName
+        mcontent.text=Html.fromHtml(mlist[position].postTitle)
 
         GlideApp.with(this)
-                .load("https://p1.pstatp.com/large/4bea0014e31708ecb03e.jpeg")
+                .load(mlist[position].firstCover)
                 .placeholder(R.mipmap.moren_icon)
                 .into(mTikTokController!!.thumb!!)
         val parent = mVideoView!!.parent
@@ -118,21 +145,18 @@ class PlayVideoActivity : BaseActivity(), View.OnClickListener {
             parent.removeView(mVideoView)
         }
         frameLayout.addView(mVideoView)
-        if (position % 2 == 0) {
-            mVideoView!!.setUrl("https://aweme.snssdk.com/aweme/v1/play/?video_id=374e166692ee4ebfae030ceae117a9d0&line=0&ratio=720p&media_type=4&vr_type=0")
+
+        mVideoView?.setUrl(mlist[position].videoUrl)
+      /*  if (mVideoView?.videoSize!![0] < mVideoView!!.videoSize[1]) {
+            mVideoView?.setScreenScale(VideoView.KEEP_SCREEN_ON)
 
         } else {
-            mVideoView!!.setUrl("http://vfx.mtime.cn/Video/2019/02/04/mp4/190204084208765161.mp4")
+            mVideoView?.setScreenScale(VideoView.SCREEN_SCALE_CENTER_CROP)
 
-        }
-        if (mVideoView!!.videoSize[0] < mVideoView!!.videoSize[1]) {
-            mVideoView!!.setScreenScale(VideoView.KEEP_SCREEN_ON)
+        }*/
+        mVideoView?.setScreenScale(VideoView.KEEP_SCREEN_ON)
 
-        } else {
-            mVideoView!!.setScreenScale(VideoView.SCREEN_SCALE_CENTER_CROP)
-
-        }
-        mVideoView!!.start()
+        mVideoView?.start()
 
     }
 
@@ -145,6 +169,10 @@ class PlayVideoActivity : BaseActivity(), View.OnClickListener {
 
     override fun onResume() {
         if (mVideoView != null) {
+            if (isplaying) {
+                isplaying = !isplaying
+                mivPlay?.visibility = View.GONE
+            }
             mVideoView!!.resume()
 
         }
@@ -168,8 +196,7 @@ class PlayVideoActivity : BaseActivity(), View.OnClickListener {
 
             }
             R.id.tv_comment -> {
-                showToast("评论")
-
+                mVideoDialog.show()
             }
             R.id.tv_lick -> {
                 showToast("喜欢")
@@ -179,13 +206,41 @@ class PlayVideoActivity : BaseActivity(), View.OnClickListener {
                 showToast("头像")
 
             R.id.iv_share -> {
-           showToast("分享")
+                showToast("分享")
             }
             R.id.iv_left -> {
-            finish()
+                finish()
+            }
+
+            R.id.view_bg -> {
+
+
+                if (!isplaying) {
+                    if (!mVideoView!!.isPlaying) {
+                        return
+                    }
+                    isplaying = !isplaying
+
+                    if (mivPlay != null) {
+                        mivPlay!!.visibility = View.VISIBLE
+                    }
+                    mVideoView?.pause()
+                } else {
+
+                    isplaying = !isplaying
+                    if (mivPlay != null) {
+                        mivPlay!!.visibility = View.GONE
+                    }
+                    mVideoView?.resume()
+                }
             }
 
         }
+    }
+
+
+    private val mVideoDialog: VideoCommentDialog by lazy {
+        VideoCommentDialog(this)
     }
 
 }

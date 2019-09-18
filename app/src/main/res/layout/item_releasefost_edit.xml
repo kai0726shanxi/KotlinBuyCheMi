@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cl_bg"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+   <EditText
+       android:id="@+id/et_post"
+       android:layout_width="@dimen/dp_0"
+       android:layout_height="wrap_content"
+       app:layout_constraintLeft_toLeftOf="parent"
+       app:layout_constraintRight_toRightOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       android:padding="@dimen/dp_10"
+       android:background="@color/transparent"
+       android:textSize="@dimen/sp_14"
+       android:textColor="@color/black_ivory"
+       android:textColorHint="@color/black_text"
+       android:hint="输入内容"/>
+
+</android.support.constraint.ConstraintLayout>

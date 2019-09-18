@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
@@ -145,6 +146,17 @@ abstract class BaseActivity : AppCompatActivity(),EasyPermissions.PermissionCall
                     .build()
                     .show()
         }
+    }
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        if (null != this.currentFocus) {
+            /**
+             * * 点击空白位置 隐藏软键盘
+             */
+            val mInputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            return mInputMethodManager.hideSoftInputFromWindow(this.currentFocus!!.windowToken, 0)
+        }
+        return super.onTouchEvent(event)
     }
 
 

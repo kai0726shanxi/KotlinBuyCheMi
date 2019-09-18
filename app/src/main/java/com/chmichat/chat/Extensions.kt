@@ -2,6 +2,7 @@ package com.chmichat.chat
 
 import android.app.Activity
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Bitmap
 import android.support.v4.app.Fragment
 import android.view.View
@@ -11,7 +12,9 @@ import com.chmichat.chat.net.BaseResponse
 import com.chmichat.chat.net.exception.ApiException
 import io.reactivex.Observable
 import android.media.MediaMetadataRetriever
-
+import android.util.TypedValue
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 /**
@@ -48,6 +51,19 @@ fun View.dip2px(dipValue: Float): Int {
 fun View.px2dip(pxValue: Float): Int {
     val scale = this.resources.displayMetrics.density
     return (pxValue / scale + 0.5f).toInt()
+}
+
+/** 获取状态栏高度  */
+fun getStatusBarHeight(context: Context): Int {
+    var result = 24
+    val resId = context.resources.getIdentifier("status_bar_height", "dimen", "android")
+    result = if (resId > 0) {
+        context.resources.getDimensionPixelSize(resId)
+    } else {
+        TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                result.toFloat(), Resources.getSystem().displayMetrics).toInt()
+    }
+    return result
 }
 
 fun durationFormat(duration: Long?): String {
@@ -95,7 +111,16 @@ fun Context.GetVieoImage(string: String?): Bitmap? {
     } catch (ex: IllegalArgumentException) {
         ex.printStackTrace()
     }
- return null
+    return null
+}
+
+fun Context.getTime4String(time: String): String {
+    //代转日期的字符串格式(输入的字符串格式)
+    var inputsdf: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+    //获取想要的日期格式(输出的日期格式)
+    var outputsdf: SimpleDateFormat = SimpleDateFormat("yyyy/MM/dd")
+    var date: Date = inputsdf.parse(time)
+    return outputsdf.format(date)
 }
 
 
@@ -103,7 +128,7 @@ fun Context.GetVieoImage(string: String?): Bitmap? {
 fun <T> Observable<BaseResponse<T>>.dispatchDefault(): Observable<BaseResponse<T>> =
         this.flatMap { tBaseModel ->
             if (tBaseModel.code == 0) {
-                Observable.just(tBaseModel!!)
+                Observable.just(tBaseModel)
             } else Observable.error(ApiException(Throwable(tBaseModel.msg), tBaseModel.code))
         }
 

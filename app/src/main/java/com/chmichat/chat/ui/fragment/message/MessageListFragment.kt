@@ -17,9 +17,10 @@ import kotlinx.android.synthetic.main.title_bar_layout.*
  */
 class MessageListFragment : BaseFragment(), View.OnClickListener {
 
-
+   val Handler =android.os.Handler()
     private var mMessageListAdapter: MessageListAdapter? = null
     var mlist = arrayListOf("系统消息", "互动消息", "活动消息", "系统消息")
+    var list=ArrayList<String>()
 
     companion object {
         fun getInstance(): MessageListFragment {
@@ -40,6 +41,8 @@ class MessageListFragment : BaseFragment(), View.OnClickListener {
         recycle_view.adapter = mMessageListAdapter
         recycle_view.layoutManager = LinearLayoutManager(activity)
         tv_title.text = "通知"
+
+
     }
 
     override fun onClick(v: View?) {

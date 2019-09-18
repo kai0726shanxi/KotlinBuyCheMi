@@ -3,6 +3,7 @@ package com.chmichat.chat.utils
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import com.chmichat.chat.App
 import java.io.*
 import kotlin.reflect.KProperty
@@ -39,10 +40,13 @@ class Preference<T>(val name:String, private val default:T) {
 
 
     operator fun getValue(thisRef: Any?, property: KProperty<*>): T {
+        Log.e("sp>>","取值")
         return getSharedPreferences(name, default)
     }
 
     operator fun setValue(thisRef: Any?, property: KProperty<*>, value: T) {
+        Log.e("sp>>","存值")
+
         putSharedPreferences(name, value)
     }
 

@@ -7,6 +7,8 @@ import android.view.View
 import com.chmichat.chat.Constants
 import com.chmichat.chat.R
 import com.chmichat.chat.base.BaseActivity
+import com.chmichat.chat.bean.SaveImageTextEntity
+import com.chmichat.chat.utils.SpUtil
 import com.chmichat.chat.utils.StatusBarUtil
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureConfig
@@ -20,13 +22,14 @@ import kotlinx.android.synthetic.main.activity_home_add.*
  */
 class HomeAddActivity : BaseActivity(), View.OnClickListener {
 
-
+   private var imageTextEntity:SaveImageTextEntity?=null
     override fun layoutId(): Int {
 
         return R.layout.activity_home_add
     }
 
     override fun initData() {
+
     }
 
     override fun initView() {
@@ -36,7 +39,6 @@ class HomeAddActivity : BaseActivity(), View.OnClickListener {
         tv_add_video.setOnClickListener(this)
         tv_add_tie.setOnClickListener(this)
         iv_delete.setOnClickListener(this)
-
     }
 
     override fun start() {
@@ -47,15 +49,28 @@ class HomeAddActivity : BaseActivity(), View.OnClickListener {
         when {
             v?.id == R.id.tv_add_imgtxt -> {
                 //图文
-                openpicture()
+                imageTextEntity=SpUtil.getObject(this,Constants.SAVEIMGTXT)
+                if (imageTextEntity!=null){
+                    val intent = Intent(this, ReleaseImageTextActivity::class.java)
+                    intent.putExtra(Constants.SAVEIMGTXT,imageTextEntity)
+                    startActivity(intent)
+                    finish()
+
+                }else{
+                    openpicture()
+
+                }
             }
             v?.id == R.id.tv_add_tie -> {
                 //帖子
-                  startActivity(Intent(this,ReleasePostActivity::class.java))
+                  startActivity(Intent(this,MyReleasePostActivity::class.java))
+                finish()
+
             }
             v?.id == R.id.tv_add_video -> {
                 //小视频
                 openvideo()
+
             }
             v?.id == R.id.tv_add_longvideo -> {
                 //长视频

@@ -132,7 +132,6 @@ class HomePresenter : BasePresenter<HomeContract.View>(), HomeContract.Presenter
                 .subscribe({ issue ->
                     mRootView?.apply {
                         dismissLoading()
-                        Log.e("dddd",">>>>"+issue.code +">>>"+issue.msg+">>>>"+issue.data)
 
                        // setRankList(issue.itemList)
                     }

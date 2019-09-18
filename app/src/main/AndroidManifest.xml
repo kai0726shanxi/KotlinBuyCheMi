@@ -48,6 +48,12 @@
             android:screenOrientation="portrait"
 
             />
+        <activity
+            android:name=".ui.activity.add.IsVisibleActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            />
 
         <activity
             android:name=".ui.activity.add.HomeAddActivity"
@@ -108,9 +114,15 @@
             android:name=".ui.activity.add.ReleaseLongVideoActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar.FullScreen" />
+
+             />
         <activity
             android:name=".ui.activity.manage.NotificationActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.CountryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
 
             android:screenOrientation="portrait" />
@@ -120,12 +132,19 @@
 
             android:screenOrientation="portrait" />
 
-        <activity android:name=".ui.activity.home.SearchForumActivity"
-            android:screenOrientation="portrait"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
-        <activity android:name=".ui.activity.add.ReleasePostActivity"
-            android:screenOrientation="portrait"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity
+            android:name=".ui.activity.home.SearchForumActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.add.ReleasePostActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.add.MyReleasePostActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+
 
         <provider
             android:name="android.support.v4.content.FileProvider"

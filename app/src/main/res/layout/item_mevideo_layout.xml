@@ -10,15 +10,15 @@
         android:id="@+id/iv_video"
         android:layout_width="@dimen/dp_0"
         android:layout_height="@dimen/dp_186"
-        android:background="@mipmap/test_video"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:scaleType="centerCrop"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:layout_width="@dimen/dp_30"
         android:layout_height="@dimen/dp_30"
-        android:src="@mipmap/ic_play"
+        android:src="@mipmap/ic_play_stop"
         app:layout_constraintBottom_toBottomOf="@+id/iv_video"
         app:layout_constraintLeft_toLeftOf="@+id/iv_video"
         app:layout_constraintRight_toRightOf="@+id/iv_video"
@@ -30,9 +30,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dp_15"
         android:background="@drawable/bg_radius_black"
-        android:text="上海"
+        android:text=""
         android:textColor="@color/white"
         android:textSize="@dimen/sp_14"
+        android:maxLength="5"
         app:layout_constraintBottom_toBottomOf="@+id/iv_video"
         app:layout_constraintRight_toRightOf="@+id/iv_video" />
 
@@ -58,6 +59,7 @@
         android:layout_height="@dimen/dp_20"
         android:layout_margin="@dimen/dp_10"
         android:src="@mipmap/head_icon"
+        app:type="circle"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_title" />
     <TextView
@@ -71,7 +73,7 @@
         app:layout_constraintRight_toLeftOf="@+id/tv_zan"
         android:textSize="@dimen/sp_10"
         android:textColor="@color/medynamic"
-        android:text="阁楼上的小猫"
+        android:text=""
         />
     <TextView
         android:id="@+id/tv_zan"
@@ -79,10 +81,10 @@
         android:layout_height="wrap_content"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBaseline_toBaselineOf="@+id/tv_name"
-        android:drawableLeft="@mipmap/test_zan"
+        android:drawableLeft="@mipmap/home_zan_ic"
         android:textColor="@color/medynamic"
         android:textSize="@dimen/sp_10"
-        android:text="999999"
+        android:text="0"
         android:lines="1"
         android:ellipsize="end"
         android:drawablePadding="@dimen/dp_5"

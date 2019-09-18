@@ -1,11 +1,13 @@
 package com.chmichat.chat.net
 
 import com.chmichat.chat.App
+import com.chmichat.chat.Constants
 import com.chmichat.chat.api.ApiService
 import com.chmichat.chat.api.UrlConstant
 import com.chmichat.chat.utils.AppUtils
 import com.chmichat.chat.utils.NetworkUtil
 import com.chmichat.chat.utils.Preference
+import com.chmichat.chat.utils.SpUtil
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -24,8 +26,6 @@ object RetrofitManager{
     val service: ApiService by lazy (LazyThreadSafetyMode.SYNCHRONIZED){
         getRetrofit().create(ApiService::class.java)
     }
-
-    private var token:String by Preference("token","")
 
     /**
      * 设置公共参数
@@ -52,7 +52,8 @@ object RetrofitManager{
             val originalRequest = chain.request()
             val requestBuilder = originalRequest.newBuilder()
                     // Provide your custom header here
-                    .header("token", token)
+
+                    .header("accessToken", SpUtil.getString(App.context,Constants.USERBEANTOKEN,""))
                     .method(originalRequest.method(), originalRequest.body())
             val request = requestBuilder.build()
             chain.proceed(request)
@@ -112,7 +113,7 @@ object RetrofitManager{
         val cache = Cache(cacheFile, 1024 * 1024 * 50) //50Mb 缓存的大小
 
         return OkHttpClient.Builder()
-                .addInterceptor(addQueryParameterInterceptor())  //参数添加
+              //  .addInterceptor(addQueryParameterInterceptor())  //参数添加
                 .addInterceptor(addHeaderInterceptor()) // token过滤
 //              .addInterceptor(addCacheInterceptor())
                 .addInterceptor(httpLoggingInterceptor) //日志,所有的请求响应度看到

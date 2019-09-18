@@ -21,9 +21,15 @@ import kotlinx.android.synthetic.main.title_bar_layout.*
 import java.text.SimpleDateFormat
 import java.util.*
 import android.content.Intent
-import android.util.Log
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.chmichat.chat.Constants
+import com.chmichat.chat.api.UrlConstant
+import com.chmichat.chat.bean.UserBean
 import com.chmichat.chat.glide.GlideApp
+import com.chmichat.chat.mvp.contract.me.EditUserInfoContract
+import com.chmichat.chat.mvp.presenter.me.EditUserInfoPresenter
+import com.chmichat.chat.showToast
+import com.chmichat.chat.utils.SpUtil
+import kotlin.collections.HashMap
 
 
 /**
@@ -31,14 +37,20 @@ import com.chmichat.chat.glide.GlideApp
  * @Author 20342
  * @Date 2019/8/14 12:07
  */
-class UserInformationActivity : BaseActivity(), View.OnClickListener {
+class UserInformationActivity : BaseActivity(),EditUserInfoContract.View, View.OnClickListener {
 
 
+    private val mPresenter by lazy { EditUserInfoPresenter() }
+    private var isPushImage:Boolean=false
+    private var map=HashMap<String,String>()
+     private var userBean:UserBean?=null
+    private var tvsex:String?=""
     override fun layoutId(): Int {
         return R.layout.activity_uesr_information
     }
 
     override fun initData() {
+        userBean=SpUtil.getObject(this,Constants.USERBEAN)
     }
 
     private var pvTime: TimePickerView? = null
@@ -54,10 +66,33 @@ class UserInformationActivity : BaseActivity(), View.OnClickListener {
         tv_right.setTextColor(ContextCompat.getColor(this,R.color.displaynomal))
         tv_right.text="保存"
         cl_bar.setBackgroundColor(Color.WHITE)
+        mPresenter.attachView(this)
+
+        GlideApp.with(this)
+                .load(UrlConstant.BASE_URL_IMAGE+userBean?.id+".png")
+                .placeholder(R.mipmap.head_ic)
+                .into(iv_head)
+        tv_name_content.setText(userBean?.nickname)
+        if (userBean?.userGender==2){
+            tv_sex_content.text = "女"
+
+        }else if (userBean?.userGender==1){
+            tv_sex_content.text = "男"
+
+        }else{
+            tv_sex_content.text = "保密"
+
+        }
+        tv_age_content.text = userBean?.birthDate
+        tv_signature_name_content.setText(userBean?.introduction)
+        tv_company_name_content.setText(userBean?.companyName)
+
+
         iv_left.setOnClickListener(this)
         tv_age_content.setOnClickListener(this)
         tv_sex_content.setOnClickListener(this)
         iv_head.setOnClickListener(this)
+        tv_right.setOnClickListener(this)
         mChoseDialog.setBtnDataLinsenter(object :ChoseSexDialog.BtnDataLinsenter{
             override fun btndata(str: String) {
              tv_sex_content.text=str
@@ -123,18 +158,16 @@ class UserInformationActivity : BaseActivity(), View.OnClickListener {
  }
     override fun onClick(v: View?) {
         when (v?.id) {
+            R.id.tv_right->{
+                pushdata()
+            }
+
             R.id.iv_left -> {
                 finish()
             }
             R.id.tv_age_content -> {
                 hintKbTwo(this)
                pvTime!!.show()
-               /* PictureSelector.create(this)
-                        .openCamera(PictureMimeType.ofVideo())
-                        .recordVideoSecond(15)
-                        .videoQuality(0)// 视频录制质量 0 or 1 int
-                        .compress(true)// 是否压缩 true or false
-                        .forResult(PictureConfig.CHOOSE_REQUEST)*/
             }
             R.id.tv_sex_content -> {
                 hintKbTwo(this)
@@ -151,6 +184,33 @@ class UserInformationActivity : BaseActivity(), View.OnClickListener {
             }
 
         }
+    }
+
+    private fun pushdata() {
+        tvsex=tv_sex_content.text.toString()
+        map.clear()
+        when(tvsex){
+            "男"->{
+                map["userGender"]="1"
+
+            }
+            "女"->{
+                map["userGender"]="2"
+
+            }
+            else->{
+                map["userGender"]="0"
+
+            }
+
+        }
+        map["nickname"]=tv_name_content.text.toString()
+
+        map["companyName"]=tv_company_name_content.text.toString()
+        map["birthDate"]=tv_age_content.text.toString()
+        map["introduction"]=tv_signature_name_content.text.toString()
+        map["editorHead"]=isPushImage.toString()
+        mPresenter.getEditUser(map)
     }
 
     private val mChoseDialog: ChoseSexDialog by lazy {
@@ -176,7 +236,6 @@ class UserInformationActivity : BaseActivity(), View.OnClickListener {
                     // 2.media.getCutPath();为裁剪后path，需判断media.isCut();是否为true  注意：音视频除外
                     // 3.media.getCompressPath();为压缩后path，需判断media.isCompressed();是否为true  注意：音视频除外
                     // 如果裁剪并压缩了，以取压缩路径为准，因为是先裁剪后压缩的
-                    Log.e("测试》》",selectList[0].compressPath)
                     GlideApp.with(this)
                             .load(selectList[0].compressPath)
                             .circleCrop()
@@ -185,6 +244,24 @@ class UserInformationActivity : BaseActivity(), View.OnClickListener {
                 }
             }
         }
+    }
+
+    override fun onEditUser(str: String?) {
+        if (!str.isNullOrEmpty()){
+            showToast(str!!)
+
+        }
+
+    }
+
+    override fun showError(msg: String, code: Int) {
+        showToast(msg)
+    }
+
+    override fun showLoading() {
+    }
+
+    override fun dismissLoading() {
     }
 
 }
