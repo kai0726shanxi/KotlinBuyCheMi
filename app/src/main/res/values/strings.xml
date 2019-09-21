@@ -43,5 +43,12 @@
     <string name="since">copyright ©2017 Xiho.</string>
     <string name="gitHub">GitHub</string>
 
-    
+    <string name="share_wx">微信好友</string>
+    <string name="share_friend">朋友圈</string>
+    <string name="share_weibo">微博</string>
+    <string name="share_copy">复制连接</string>
+    <string name="share_QR">二维码</string>
+    <string name="share_report">举报</string>
+
+
 </resources>

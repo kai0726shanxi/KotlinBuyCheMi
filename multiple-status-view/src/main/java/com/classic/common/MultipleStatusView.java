@@ -115,7 +115,12 @@ public class MultipleStatusView extends ConstraintLayout {
      * @param layoutParams 布局参数
      */
     public final void showEmpty(int layoutId, ViewGroup.LayoutParams layoutParams) {
-        showEmpty(inflateView(layoutId), layoutParams);
+        try {
+            showEmpty(inflateView(layoutId), layoutParams);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -187,7 +192,15 @@ public class MultipleStatusView extends ConstraintLayout {
      * @param layoutParams 布局参数
      */
     public final void showLoading(int layoutId, ViewGroup.LayoutParams layoutParams) {
-        showLoading(inflateView(layoutId), layoutParams);
+        try {
+            if (inflateView(layoutId)!=null){
+                showLoading(inflateView(layoutId), layoutParams);
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     /**

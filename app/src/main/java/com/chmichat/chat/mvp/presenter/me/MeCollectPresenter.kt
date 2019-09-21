@@ -14,11 +14,11 @@ class MeCollectPresenter:BasePresenter<MeCollectContract.View>(),MeCollectContra
         MeCollectModel()
     }
 
-    override fun getCollectList(str: String) {
+    override fun getCollectList(map: Map<String,String>) {
         checkViewAttached()
         mRootView?.showLoading()
 
-        val disposable = mCollectModel.getColletList(str)
+        val disposable = mCollectModel.getColletList(map)
                 .subscribe({ data ->
                     mRootView?.apply {
                         dismissLoading()

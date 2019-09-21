@@ -1,5 +1,6 @@
 package com.chmichat.chat.base
 
+import android.content.Context
 import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.v4.app.Fragment
@@ -7,6 +8,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.Toast
 import com.classic.common.MultipleStatusView
 import com.chmichat.chat.App
@@ -138,5 +141,22 @@ import pub.devrel.easypermissions.EasyPermissions
                     .build()
                     .show()
         }
+    }
+
+    /**
+     * 打卡软键盘
+     */
+    fun openKeyBord(mEditText: EditText, mContext: Context) {
+        val imm = mContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(mEditText, InputMethodManager.RESULT_SHOWN)
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
+    }
+
+    /**
+     * 关闭软键盘
+     */
+    fun closeKeyBord(mEditText: EditText, mContext: Context) {
+        val imm = mContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(mEditText.windowToken, 0)
     }
 }

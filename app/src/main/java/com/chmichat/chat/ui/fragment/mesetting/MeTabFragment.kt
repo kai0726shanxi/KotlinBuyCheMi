@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.chmichat.chat.R
 import com.chmichat.chat.base.BaseFragment
-import com.chmichat.chat.bean.CollectEntity
 import com.chmichat.chat.bean.PostListEntity
 import com.chmichat.chat.mvp.contract.me.MeTabContract
 import com.chmichat.chat.mvp.presenter.me.MeTabPresenter
@@ -174,10 +173,10 @@ class MeTabFragment : BaseFragment(), MeTabContract.View {
                 mRecyclerView.addItemDecoration(object : RecyclerView.ItemDecoration() {
                     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State?) {
                         val position = parent.getChildPosition(view)
-                        val offset = DisplayManager.dip2px(5f)!!
+                        val offset = DisplayManager.dip2px(2f)!!
 
-                        outRect.set(if (position % 2 == 0) 10 else offset, offset,
-                                if (position % 2 == 0) offset else 10, offset)
+                        outRect.set(if (position % 2 == 0) 20 else offset, offset,
+                                if (position % 2 == 0) offset else 20, offset)
                     }
 
                 })
@@ -198,7 +197,7 @@ class MeTabFragment : BaseFragment(), MeTabContract.View {
                 rg.visibility = View.VISIBLE
                 fl_content.visibility = View.VISIBLE
                 refreshLayout.visibility = View.GONE
-                mPresenter.getCollectList("1")
+              //  mPresenter.getCollectList("1")
                 rg.setOnCheckedChangeListener { _, checkedId ->
                     when (checkedId) {
 
@@ -238,7 +237,7 @@ class MeTabFragment : BaseFragment(), MeTabContract.View {
 
     }
 
-    override fun setCollectList(data: ArrayList<CollectEntity>?, total: Int) {
+    override fun setCollectList(data: ArrayList<PostListEntity>?, total: Int) {
 
     }
 

@@ -9,11 +9,15 @@ import com.chmichat.chat.bean.ForumListEntity
  */
 interface AllDynamicContract {
     interface View:IBaseView{
+        fun onCollect(date: String?)
+        fun onCancleCollect(date: String?)
         fun OnDynamicDetails(data:ForumListEntity?)
         fun showError(errmsg:String,code:Int)
     }
 
     interface Presenter{
         fun getDynamicDetails(map: String)
+        fun getCollectData(map: Map<String,String>)
+        fun getConcelCollectData(map: Map<String, String>)
     }
 }

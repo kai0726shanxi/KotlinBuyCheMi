@@ -54,7 +54,7 @@ class HomeClassifyAdapter(context: Context, data: ArrayList<ForumListEntity>)
         tv.text=data.sectionName
         holder.setOnItemClickListener(View.OnClickListener {
             val intent = Intent(mContext as Activity, AllDynamicActivity::class.java)
-            intent.putExtra(Constants.KEYNAME,mData[position])
+            intent.putExtra(Constants.KEYNAME,mData[position].id)
             mContext.startActivity(intent)
         })
 

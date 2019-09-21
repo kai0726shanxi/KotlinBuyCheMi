@@ -430,7 +430,7 @@ class MyReleasePostActivity : BaseActivity(), ReleasePostContract.View, View.OnC
 
             for (index in userInfoList!!) {
                 if (index.isPic == 0) {
-                    strbuf.append("< img src=\"" + ImageUrl?.get(imgurlpostion) + "\" style=\"width: 100%;max-width: 100%;\">")
+                    strbuf.append("<img src=\"" + ImageUrl?.get(imgurlpostion) + "\" style=\"width: 100%;max-width: 100%;\">")
                     imgurlpostion++
                 } else {
                     if (!index.text.isNullOrEmpty()) {

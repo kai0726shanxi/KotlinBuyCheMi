@@ -35,11 +35,11 @@ class MeTabPresenter:BasePresenter<MeTabContract.View>(),MeTabContract.Presenter
         MeTabModel()
     }
 
-    override fun getCollectList(str: String) {
+    override fun getCollectList(map: Map<String, String>) {
          checkViewAttached()
         mRootView?.showLoading()
 
-        val disposable = metabModel.getColletList(str)
+        val disposable = metabModel.getColletList(map)
                 .subscribe({ data ->
                     mRootView?.apply {
                         dismissLoading()

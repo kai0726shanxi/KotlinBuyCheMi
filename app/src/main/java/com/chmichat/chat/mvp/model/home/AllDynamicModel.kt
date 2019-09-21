@@ -19,4 +19,28 @@ class AllDynamicModel {
                 .dispatchDefault()
                 .compose(SchedulerUtils.ioToMain())
     }
+
+
+
+    /**
+     * 收藏板块
+     */
+    fun getCollectBBs(map: Map<String,String>): Observable<BaseResponse<String>> {
+
+
+        return RetrofitManager.service.getCollectionPlate(map)
+                .dispatchDefault()
+                .compose(SchedulerUtils.ioToMain())
+    }
+
+    /**
+     * 取消收藏
+     */
+    fun getCancelCollectBBs(map: Map<String,String>): Observable<BaseResponse<String>> {
+
+
+        return RetrofitManager.service.getCancleCollectionPlate(map)
+                .dispatchDefault()
+                .compose(SchedulerUtils.ioToMain())
+    }
 }

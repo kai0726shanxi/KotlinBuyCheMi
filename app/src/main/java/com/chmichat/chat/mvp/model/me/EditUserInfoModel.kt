@@ -1,6 +1,5 @@
 package com.chmichat.chat.mvp.model.me
 
-import com.chmichat.chat.bean.CollectEntity
 import com.chmichat.chat.dispatchDefault
 import com.chmichat.chat.net.BaseResponse
 import com.chmichat.chat.net.RetrofitManager

@@ -46,6 +46,7 @@ class ReleaseImageTextActivity : BaseActivity(), ImageTextContract.View, View.On
     private var forumid:String?=""
     private var address:String?=""
     private var map=HashMap<String,String?>()
+    private var strbuf: StringBuffer = StringBuffer()
     private var imageentity:SaveImageTextEntity?=null
     private val mPresenter by lazy { ImageTextPresenter() }
     override fun layoutId(): Int {
@@ -165,9 +166,11 @@ class ReleaseImageTextActivity : BaseActivity(), ImageTextContract.View, View.On
 
             }
             R.id.tv_right->{
+                strbuf.append("<img src=\"$ImageUrl\" style=\"width: 100%;max-width: 100%;\">")
+                strbuf.append("<div style=\"max-width: 100%;\">" + edit_content.text.toString() + "</div>")
                map.clear()
                map["postTitle"]=tv_name.text.toString()
-               map["content"]=edit_content.text.toString()
+               map["content"]=strbuf.toString()
                map["sectionId"]=forumid
                map["position"]=tv_address_content.text.toString()
                map["firstCover"]=ImageUrl

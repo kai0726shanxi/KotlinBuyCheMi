@@ -39,7 +39,7 @@ class ReleaseLongVideoActivity : BaseActivity(), View.OnClickListener {
 
     override fun initView() {
 
-        mFragments?.add(HomeIntroductionFragment.getInstance())
+        mFragments?.add(HomeIntroductionFragment.getInstance(mPostListEntity))
         mFragments?.add(HomeCommentFragment.getInstance(mPostListEntity?.id))
         mViewPager.adapter = BaseFragmentAdapter(supportFragmentManager, mFragments, mTitles)
         tab_layout.setViewPager(mViewPager)

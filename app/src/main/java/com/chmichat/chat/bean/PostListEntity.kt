@@ -29,6 +29,23 @@ data class PostListEntity(var id: Int,
                           var isEssence: Int,
                           var isTop: Int,
                           var postStatisticsData: PostStatisticsData?,
+                          var userPostOperation:UserPostOperation?,
+                          var collectionType: Int,
+                          var collectionId: Int,
+                          var sectionIcon: String?,
+                          var postTotal: Int,
+                          var collectionNum: Int,
+                          var commentsNum: Int,
+                          var praiseNum: Int,
+                          var readingNum: Int,
+                          var shareNum: Int,
+                          var treadNum: Int,
+                          var postContentDesc:String?,
+                          var authorId:Int,
+                          var authorType:Int,
+                          var postType:Int,
+                          var postCreateTime:String?,
+                          var postCover:String?,
                           var postCoverList: List<ImageUrlData>?):Serializable {
     data class PostStatisticsData(var postId: Int,
                                   var readingNum: Int,
@@ -44,4 +61,5 @@ data class PostListEntity(var id: Int,
                                   var realTreadNum: Int):Serializable
 
     data class ImageUrlData(var id:Int,var coverImg:String?):Serializable
+    data class UserPostOperation(var praise:Boolean,var collection:Boolean):Serializable
 }

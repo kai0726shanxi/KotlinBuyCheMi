@@ -33,7 +33,6 @@ class MeSettingFragment : BaseFragment(), MeSettingContract.View, View.OnClickLi
     private val mPresenter by lazy { MeSettingPresenter() }
 
     private var mMeBrowseAdapter: MeBrowseAdapter? = null
-    private val mlist = arrayListOf("1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1")
     private var mRecentlist=ArrayList<RecentBrowseEntity>()
     private val mTabTitleList = ArrayList<String>()
 

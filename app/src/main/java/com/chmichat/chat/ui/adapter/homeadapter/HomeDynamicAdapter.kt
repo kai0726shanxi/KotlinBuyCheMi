@@ -1,16 +1,20 @@
 package com.chmichat.chat.ui.adapter.homeadapter
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import com.chmichat.chat.Constants
 import com.chmichat.chat.R
 import com.chmichat.chat.R.id.tv_name
 import com.chmichat.chat.api.UrlConstant
 import com.chmichat.chat.bean.PostListEntity
 import com.chmichat.chat.getTime4String
 import com.chmichat.chat.glide.GlideApp
+import com.chmichat.chat.ui.activity.home.PostDetailsActivity
 import com.chmichat.chat.view.recyclerview.ViewHolder
 import com.chmichat.chat.view.recyclerview.adapter.CommonAdapter
 
@@ -76,6 +80,13 @@ class HomeDynamicAdapter(context: Context, data: ArrayList<PostListEntity>) : Co
             holder.setViewVisibility(R.id.cl_content_img, View.GONE)
 
         }
+
+        holder.setOnItemClickListener(listener = View.OnClickListener {
+            val intent = Intent(mContext as Activity, PostDetailsActivity::class.java)
+            intent.putExtra(Constants.KEYNAME, data.id)
+            mContext.startActivity(intent)
+
+        })
 
     }
 

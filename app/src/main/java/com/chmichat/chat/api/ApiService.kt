@@ -1,7 +1,6 @@
 package com.chmichat.chat.api
 
 import com.chmichat.chat.bean.*
-import com.chmichat.chat.mvp.model.bean.*
 import com.chmichat.chat.net.BaseResponse
 import io.reactivex.Observable
 import okhttp3.RequestBody
@@ -13,75 +12,6 @@ import retrofit2.http.*
  */
 
 interface ApiService {
-
-    /**
-     * 首页精选
-     */
-    @GET("v2/feed?")
-    fun getFirstHomeData(@Query("num") num: Int): Observable<HomeBean>
-
-    /**
-     * 根据 nextPageUrl 请求数据下一页数据
-     */
-    @GET
-    fun getMoreHomeData(@Url url: String): Observable<HomeBean>
-
-    /**
-     * 根据item id获取相关视频
-     */
-    @GET("v4/video/related?")
-    fun getRelatedData(@Query("id") id: Long): Observable<HomeBean.Issue>
-
-    /**
-     * 获取分类
-     */
-    @GET("v4/categories")
-    fun getCategory(): Observable<ArrayList<CategoryBean>>
-
-    /**
-     * 获取分类详情List
-     */
-    @GET("v4/categories/videoList?")
-    fun getCategoryDetailList(@Query("id") id: Long): Observable<HomeBean.Issue>
-
-    /**
-     * 获取更多的 Issue
-     */
-    @GET
-    fun getIssueData(@Url url: String): Observable<HomeBean.Issue>
-
-    /**
-     * 获取全部排行榜的Info（包括，title 和 Url）
-     */
-    @GET("v4/rankList")
-    fun getRankList(): Observable<TabInfoBean>
-
-    /**
-     * 获取搜索信息
-     */
-    @GET("v1/search?&num=10&start=10")
-    fun getSearchData(@Query("query") query: String): Observable<HomeBean.Issue>
-
-    /**
-     * 热门搜索词
-     */
-    @GET("v3/queries/hot")
-    fun getHotWord(): Observable<ArrayList<String>>
-
-    /**
-     * 关注
-     */
-    @GET("v4/tabs/follow")
-    fun getFollowInfo(): Observable<HomeBean.Issue>
-
-
-
-    /**
-     * 测试
-     */
-    @FormUrlEncoded
-    @POST("api/system/banner/getPage")
-    fun getHomeBanner(@FieldMap parmer: Map<String, String>): Observable<BaseResponse<List<BannerBean>>>
 
     /**
      * 开关详情
@@ -208,8 +138,17 @@ interface ApiService {
      * @param parmer
      * @return
      */
+    @FormUrlEncoded
+
     @POST("bbs/user/collection/page")
-    fun getCollectionList( @Query("collectionType") type:String): Observable<BaseResponse<ArrayList<CollectEntity>>>
+    fun getCollectionList( @FieldMap parmer: Map<String, String>): Observable<BaseResponse<ArrayList<PostListEntity>>>
+    /**
+     * 帖子详情
+     * @param parmer
+     * @return
+     */
+    @GET("bbs/forum/post/findByPostId")
+    fun getPostDtetails( @Query("postId") mid:String ): Observable<BaseResponse<PostListEntity>>
 
     /**
      * 上传图片
@@ -306,6 +245,59 @@ interface ApiService {
     @FormUrlEncoded
     @POST("bbs/forum/post/my/page")
     fun getMypostlist(@FieldMap parmer: Map<String, String>): Observable<BaseResponse<ArrayList<PostListEntity>>>
+
+    /**
+     *收藏板块
+     * @param parmer
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("bbs/user/collection/section")
+    fun getCollectionPlate(@FieldMap parmer: Map<String, String>): Observable<BaseResponse<String>>
+    /**
+     *收藏帖子
+     * @param parmer
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("bbs/user/collection/post")
+    fun getCollectionPost(@FieldMap parmer: Map<String, String>): Observable<BaseResponse<String>>
+    /**
+     *取消收藏帖子
+     * @param parmer
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("bbs/user/collection/cancelPost")
+    fun getCancelCollectionPost(@FieldMap parmer: Map<String, String>): Observable<BaseResponse<String>>
+
+    /**
+     *赞帖子
+     * @param parmer
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("bbs/user/action/praise")
+    fun getpraisePost(@FieldMap parmer: Map<String, String>): Observable<BaseResponse<String>>
+    /**
+     *取消赞
+     * @param parmer
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("bbs/user/action/cancel")
+    fun getCancelpraisePost(@FieldMap parmer: Map<String, String>): Observable<BaseResponse<String>>
+
+    /**
+     *取消收藏板块
+     * @param parmer
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("bbs/user/collection/cancelSection")
+    fun getCancleCollectionPlate(@FieldMap parmer: Map<String, String>): Observable<BaseResponse<String>>
+
+
 
     /**
      * 查询个人信息

@@ -189,18 +189,22 @@ class DiscoverRecycleVIewFragment : BaseFragment(), DiscoverTabContract.View {
     }
 
     override fun lazyLoad() {
-
+        setpushdata()
 
     }
 
     override fun onPostList(data: ArrayList<PostListEntity>?, pagetotal: Int?) {
         mTotalPage = pagetotal
         if (data != null) {
+
             if (!mPosition.isNullOrEmpty() && mPosition != "5") {
                 if (page == 1) {
+                    mlist.clear()
+                    mlist.addAll(data)
                     mDiscoverContentAdapter?.addDataNew(data)
 
                 } else {
+                    mlist.addAll(data)
                     mDiscoverContentAdapter?.addDataAll(data)
 
                 }
@@ -237,8 +241,9 @@ class DiscoverRecycleVIewFragment : BaseFragment(), DiscoverTabContract.View {
 
     override fun onStart() {
         super.onStart()
-        page=1
-        setpushdata()
+      if (mlist==null||mlist.size==0){
+          mLayoutStatusView?.showEmpty()
+      }
 
     }
 }

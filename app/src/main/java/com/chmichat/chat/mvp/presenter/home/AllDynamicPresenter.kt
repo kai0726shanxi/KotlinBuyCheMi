@@ -10,8 +10,43 @@ import com.chmichat.chat.net.exception.ExceptionHandle
  * @Date 2019/9/18 15:01
  */
 class AllDynamicPresenter:BasePresenter<AllDynamicContract.View>(),AllDynamicContract.Presenter {
+    override fun getCollectData(map: Map<String, String>) {
+        checkViewAttached()
+        mRootView?.showLoading()
 
-   private val allModel:AllDynamicModel by lazy { AllDynamicModel() }
+        val disposable = allModel.getCollectBBs(map)
+                .subscribe({ data ->
+                    mRootView?.apply {
+                        dismissLoading()
+                        onCollect(data.data)
+                    }
+                }, { throwable ->
+                    mRootView?.apply {
+                        //处理异常
+                        showError(ExceptionHandle.handleException(throwable), ExceptionHandle.errorCode)
+                    }
+                })
+        addSubscription(disposable)    }
+
+    override fun getConcelCollectData(map: Map<String, String>) {
+        checkViewAttached()
+        mRootView?.showLoading()
+
+        val disposable = allModel.getCancelCollectBBs(map)
+                .subscribe({ data ->
+                    mRootView?.apply {
+                        dismissLoading()
+                        onCancleCollect(data.data)
+                    }
+                }, { throwable ->
+                    mRootView?.apply {
+                        //处理异常
+                        showError(ExceptionHandle.handleException(throwable), ExceptionHandle.errorCode)
+                    }
+                })
+        addSubscription(disposable)       }
+
+    private val allModel:AllDynamicModel by lazy { AllDynamicModel() }
     override fun getDynamicDetails(map:String) {
         checkViewAttached()
         mRootView?.showLoading()

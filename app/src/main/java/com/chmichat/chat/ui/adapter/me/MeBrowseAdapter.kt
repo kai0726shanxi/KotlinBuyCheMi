@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.View
+import com.chmichat.chat.Constants
 import com.chmichat.chat.R
 import com.chmichat.chat.bean.RecentBrowseEntity
 import com.chmichat.chat.ui.activity.home.AllDynamicActivity
@@ -26,12 +27,13 @@ class MeBrowseAdapter(context: Context,list: ArrayList<RecentBrowseEntity>):Comm
     override fun bindData(holder: ViewHolder, data: RecentBrowseEntity, position: Int) {
 
         data?.sectionName?.let { holder.setText(R.id.tv_name, it) }
-        data?.browseNum?.let { holder.setText(R.id.tv_num, it.toString()+"条帖子") }
+        data?.postTotal?.let { holder.setText(R.id.tv_num, it+"条帖子") }
         holder.setOnItemClickListener(listener = View.OnClickListener {
-            mContext.startActivity(Intent(mContext as Activity,AllDynamicActivity::class.java))
+
+            val intent=Intent(mContext as Activity,AllDynamicActivity::class.java)
+            intent.putExtra(Constants.KEYNAME,mData[position].plateId)
+            mContext.startActivity(intent)
         })
-
-
     }
 
 }

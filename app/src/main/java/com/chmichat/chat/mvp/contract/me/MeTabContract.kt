@@ -1,7 +1,6 @@
 package com.chmichat.chat.mvp.contract.me
 
 import com.chmichat.chat.base.IBaseView
-import com.chmichat.chat.bean.CollectEntity
 import com.chmichat.chat.bean.PostListEntity
 
 /**
@@ -13,7 +12,7 @@ interface MeTabContract {
         /***
          * 收藏
          */
-        fun setCollectList(data:ArrayList<CollectEntity>?,totalsize:Int)
+        fun setCollectList(data:ArrayList<PostListEntity>?,totalsize:Int)
         /**
          * 显示错误信息
          */
@@ -26,7 +25,7 @@ interface MeTabContract {
         /**
          * 收藏
          */
-        fun getCollectList(str:String)
+        fun getCollectList(map: Map<String, String>)
 
         /**
          * 我的帖子

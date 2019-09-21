@@ -3,19 +3,17 @@ package com.chmichat.chat.ui.adapter.me
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import com.chmichat.chat.Constants
 import com.chmichat.chat.R
-import com.chmichat.chat.R.id.tv_time
 import com.chmichat.chat.api.UrlConstant
-import com.chmichat.chat.bean.CollectEntity
 import com.chmichat.chat.bean.PostListEntity
-import com.chmichat.chat.bean.RecentBrowseEntity
 import com.chmichat.chat.getTime4String
 import com.chmichat.chat.glide.GlideApp
 import com.chmichat.chat.ui.activity.add.ReleaseLongVideoActivity
-import com.chmichat.chat.ui.activity.home.AllDynamicActivity
 import com.chmichat.chat.ui.activity.home.PlayVideoActivity
+import com.chmichat.chat.ui.activity.home.PostDetailsActivity
 import com.chmichat.chat.view.recyclerview.MultipleType
 import com.chmichat.chat.view.recyclerview.ViewHolder
 import com.chmichat.chat.view.recyclerview.adapter.CommonAdapter
@@ -61,16 +59,23 @@ class MeDynamicAdapter(context: Context, data: ArrayList<PostListEntity>) : Comm
     }
 
     override fun bindData(holder: ViewHolder, data: PostListEntity, position: Int) {
+        Log.e(">>startPlay>",position.toString())
+
         when(data.type){
             3->{
-             GlideApp.with(mContext)
-                     .load(data.firstCover)
-                     .placeholder(R.mipmap.moren_icon)
-                     .into(holder.getView(R.id.iv_video))
-             GlideApp.with(mContext)
-                     .load(UrlConstant.BASE_URL_IMAGE+data.userId+".png")
-                     .placeholder(R.mipmap.head_ic)
-                     .into(holder.getView(R.id.iv_avater))
+             if (data.firstCover!=null){
+                 GlideApp.with(mContext)
+                         .load(data.firstCover)
+                         .placeholder(R.mipmap.moren_icon)
+                         .into(holder.getView(R.id.iv_video))
+             }
+            if (data.userId!=null){
+                GlideApp.with(mContext)
+                        .load(UrlConstant.BASE_URL_IMAGE+data.userId+".png")
+                        .placeholder(R.mipmap.head_ic)
+                        .into(holder.getView(R.id.iv_avater))
+            }
+
                 data.userName?.let { holder.setText(R.id.tv_name, it) }
                 data.postTitle?.let { holder.setText(R.id.tv_title, it) }
                 holder.setText(R.id.tv_zan,data.postStatisticsData?.praiseNum.toString())
@@ -82,16 +87,28 @@ class MeDynamicAdapter(context: Context, data: ArrayList<PostListEntity>) : Comm
 
                     mContext.startActivity(intent)
                 })
+                holder.setOnItemClickListener(listener = View.OnClickListener {
+                    val intent = Intent(mContext as Activity, PlayVideoActivity::class.java)
+                    intent.putExtra(Constants.PLAYPOSITION, position)
+                    intent.putExtra(Constants.PLAYLIST, mData)
+
+                    mContext.startActivity(intent)
+                })
             }
             4->{
-                GlideApp.with(mContext)
-                        .load(data.firstCover)
-                        .placeholder(R.mipmap.moren_icon)
-                        .into(holder.getView(R.id.iv_video))
-                GlideApp.with(mContext)
-                        .load(UrlConstant.BASE_URL_IMAGE+data.userId+".png")
-                        .placeholder(R.mipmap.head_ic)
-                        .into(holder.getView(R.id.iv_avater))
+                if (data.firstCover!=null){
+                    GlideApp.with(mContext)
+                            .load(data.firstCover)
+                            .placeholder(R.mipmap.moren_icon)
+                            .into(holder.getView(R.id.iv_video))
+                }
+                if (data.userId!=null){
+                    GlideApp.with(mContext)
+                            .load(UrlConstant.BASE_URL_IMAGE+data.userId+".png")
+                            .placeholder(R.mipmap.head_ic)
+                            .into(holder.getView(R.id.iv_avater))
+                }
+
                 data.userName?.let { holder.setText(R.id.tv_name, it) }
                 data.postTitle?.let { holder.setText(R.id.tv_title, it) }
                 data.createTime?.let { mContext.getTime4String(it) }?.let { holder.setText(R.id.tv_time, it) }
@@ -111,6 +128,12 @@ class MeDynamicAdapter(context: Context, data: ArrayList<PostListEntity>) : Comm
                 data.sectionName?.let { holder.setText(R.id.tv_source, "来自  $it") }
                 holder.setText(R.id.tv_comment,data.postStatisticsData?.commentsNum.toString())
                 holder.setText(R.id.tv_zan,data.postStatisticsData?.praiseNum.toString())
+                holder.setOnItemClickListener(listener = View.OnClickListener {
+                    val intent = Intent(mContext as Activity, PostDetailsActivity::class.java)
+                    intent.putExtra(Constants.KEYNAME, data.id)
+                    mContext.startActivity(intent)
+
+                })
             }
         }
 

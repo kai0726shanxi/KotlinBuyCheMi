@@ -1,8 +1,6 @@
 package com.chmichat.chat.mvp.model.me
 
-import com.chmichat.chat.bean.CollectEntity
 import com.chmichat.chat.bean.PostListEntity
-import com.chmichat.chat.bean.RecentBrowseEntity
 import com.chmichat.chat.dispatchDefault
 import com.chmichat.chat.net.BaseResponse
 import com.chmichat.chat.net.RetrofitManager
@@ -19,10 +17,10 @@ class MeTabModel {
     /***
      *收藏列表
      */
-    fun getColletList(str:String): Observable<BaseResponse<ArrayList<CollectEntity>>> {
+    fun getColletList(map: Map<String, String>): Observable<BaseResponse<ArrayList<PostListEntity>>> {
 
 
-        return RetrofitManager.service.getCollectionList(str)
+        return RetrofitManager.service.getCollectionList(map)
                 .dispatchDefault()
                 .compose(SchedulerUtils.ioToMain())
 

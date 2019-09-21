@@ -1,6 +1,7 @@
 package com.chmichat.chat.ui.activity.home
 
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.support.v4.app.Fragment
 import android.view.View
 import com.chmichat.chat.Constants
@@ -27,14 +28,19 @@ class AllDynamicActivity : BaseActivity(), AllDynamicContract.View, View.OnClick
     private val mPresenter: AllDynamicPresenter by lazy { AllDynamicPresenter() }
     private var mlist = arrayListOf("全部", "精华", "最新")
     private var mFragmentList = ArrayList<Fragment>()
+    private var mId: Int? = 0
+    private var drawableTop: Drawable? = null
+    private var drawableTopcheck: Drawable? = null
+    private var map=HashMap<String,String>()
     private var mForumListEntity:ForumListEntity?=null
+
 
     override fun layoutId(): Int {
         return R.layout.activity_all_dynamic
     }
 
     override fun initData() {
-        mForumListEntity= intent.getSerializableExtra(Constants.KEYNAME) as ForumListEntity?
+        mId = intent.getIntExtra(Constants.KEYNAME, 0)
     }
 
     override fun initView() {
@@ -44,10 +50,13 @@ class AllDynamicActivity : BaseActivity(), AllDynamicContract.View, View.OnClick
         iv_left.visibility = View.VISIBLE
         iv_left.setColorFilter(Color.BLACK)
         iv_left.setOnClickListener(this)
+        tv_collect.setOnClickListener(this)
         tv_title.visibility = View.INVISIBLE
+        drawableTop = resources.getDrawable(R.mipmap.dynamic_cang_no)
+        drawableTopcheck = resources.getDrawable(R.mipmap.dynamic_cang)
         for (index in mlist.indices) {
 
-            mFragmentList.add(DiscoverRecycleVIewFragment.getInstance("$index",mForumListEntity?.id,"bbs"))
+            mFragmentList.add(DiscoverRecycleVIewFragment.getInstance("$index", mId, "bbs"))
         }
         mViewPager.adapter = BaseFragmentAdapter(supportFragmentManager, mFragmentList, mlist)
 
@@ -55,7 +64,7 @@ class AllDynamicActivity : BaseActivity(), AllDynamicContract.View, View.OnClick
     }
 
     override fun start() {
-        mPresenter.getDynamicDetails(mForumListEntity?.id.toString())
+        mPresenter.getDynamicDetails(mId.toString())
     }
 
     override fun onClick(v: View?) {
@@ -64,25 +73,49 @@ class AllDynamicActivity : BaseActivity(), AllDynamicContract.View, View.OnClick
             R.id.iv_left -> {
                 finish()
             }
+            R.id.tv_collect->{
+                if (mForumListEntity!=null){
+                    map.clear()
+                    map["sectionId"]=mForumListEntity?.id.toString()
+                    if (mForumListEntity?.isCollection=="1"){
+
+                        mPresenter.getConcelCollectData(map)
+                    }else{
+                        mPresenter.getCollectData(map)
+
+
+                    }
+                }else{
+                    showToast("稍后重试~~")
+                }
+            }
         }
     }
 
 
     override fun OnDynamicDetails(data: ForumListEntity?) {
-        if (data!=null){
+        if (data != null) {
+            mForumListEntity=data
             GlideApp.with(this)
                     .load(data.sectionIcon)
                     .placeholder(R.mipmap.moren_icon)
                     .into(iv_head)
-            tv_tag.text=data.sectionName
-            if (data.reading_num.isNullOrEmpty()){
-                tv_read.text="阅读 0  |  帖子 "+data.total
+            tv_tag.text = data.sectionName
+            if (data.reading_num.isNullOrEmpty()) {
+                tv_read.text = "阅读 0  |  帖子 " + data.total
 
-            }else{
-                tv_read.text="阅读 "+data.reading_num+"  |  帖子 "+data.total
+            } else {
+                tv_read.text = "阅读 " + data.reading_num + "  |  帖子 " + data.total
 
             }
+            if (data.isCollection == "1") {
+                tv_collect.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopcheck, null, null)
+                tv_collect.compoundDrawablePadding = 4
+            } else {
 
+                tv_collect.setCompoundDrawablesWithIntrinsicBounds(null, drawableTop, null, null)
+                tv_collect.compoundDrawablePadding = 4
+            }
 
         }
 
@@ -98,4 +131,21 @@ class AllDynamicActivity : BaseActivity(), AllDynamicContract.View, View.OnClick
 
     override fun dismissLoading() {
     }
+
+    override fun onCollect(date: String?) {
+        //收藏成功
+        showToast("收藏成功")
+        tv_collect.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopcheck, null, null)
+       mForumListEntity?.isCollection="1"
+    }
+
+    override fun onCancleCollect(date: String?) {
+        //取消收藏成功
+        showToast("取消收藏")
+
+        tv_collect.setCompoundDrawablesWithIntrinsicBounds(null, drawableTop, null, null)
+        mForumListEntity?.isCollection="0"
+
+    }
+
 }

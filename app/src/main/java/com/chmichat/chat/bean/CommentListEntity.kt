@@ -15,6 +15,6 @@ data class CommentListEntity(var id:Int?,
                              var receiveUserName:String?,
                              var comment:String?,
                              var showComment:String?,
-                             var level:String?,
+                             var level:String?="",
                              var auditTime:String?,
-                             var createTime:String):Serializable
+                             var createTime:String?):Serializable

@@ -152,6 +152,8 @@ class HomeBBSFragment : BaseFragment(), HomeForumContract.View {
         imgmap.clear()
         dynamicmap.clear()
         hotmap["isHot"] = "1"
+        hotmap["type"]="2"
+
         mPresenter.getHotPostList(hotmap)
         imgmap["type"]="1"
         mPresenter.getImagePostList(imgmap)

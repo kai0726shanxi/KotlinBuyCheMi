@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/sp_12"
         android:textColor="@color/black_text"
-        android:text="7-26 00：00"
+        android:text=""
         app:layout_constraintLeft_toLeftOf="@+id/tv_content"
         app:layout_constraintTop_toBottomOf="@+id/tv_content"
         android:layout_marginTop="@dimen/dp_5"/>
