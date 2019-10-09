@@ -216,7 +216,7 @@ class ReleaseImageTextActivity : BaseActivity(), ImageTextContract.View, View.On
     }
 
     override fun showError(errorMsg: String, errorCode: Int) {
-        showToast(errorMsg)
+       ShowErrorMes(errorMsg,errorCode)
     }
 
     override fun showLoading() {

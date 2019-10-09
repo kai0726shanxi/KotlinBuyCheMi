@@ -25,13 +25,15 @@ class ShareDialog : Dialog,View.OnClickListener {
     private var mList= arrayListOf(context.getString(R.string.share_wx),context.getString(R.string.share_friend),"QQ",context.getString(R.string.share_weibo),context.getString(R.string.share_copy),context.getString(R.string.share_QR),context.getString(R.string.share_report))
 
     private var madapter:ShareDialogAdapter ?=null
-
+    private var mContext:Context?=null
 
     constructor(context: Context) : super(context, R.style.DialogTheme) {
+        mContext=context
         initView(context)
     }
 
     protected constructor(context: Context, cancelable: Boolean, cancelListener: DialogInterface.OnCancelListener?) : super(context, cancelable, cancelListener) {
+        mContext=context
         initView(context)
     }
 
@@ -45,6 +47,20 @@ class ShareDialog : Dialog,View.OnClickListener {
         convertView = LayoutInflater.from(mcontext).inflate(R.layout.layout_dialog_share, null, false)
         recycleshare=convertView?.findViewById<RecyclerView>(R.id.recycle_share)
         madapter= ShareDialogAdapter(mcontext,mList)
+        madapter?.setOnTagItemClickListener {
+            when(it){
+             context?.getText(R.string.share_report)->{
+                 if (mOnclick!=null){
+                     dismiss()
+                     mOnclick?.btndata(it)
+                 }
+
+
+             }
+            }
+
+
+        }
         recycleshare?.adapter=madapter
         recycleshare?.layoutManager=GridLayoutManager(mcontext,4)
 

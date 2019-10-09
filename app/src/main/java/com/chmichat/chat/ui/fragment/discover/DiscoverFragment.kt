@@ -49,7 +49,14 @@ class DiscoverFragment : BaseFragment(),DiscoverContract.View {
     }
 
     override fun lazyLoad() {
-        mPresenter.getForumlist(map)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (mForumList==null||mForumList.size==0){
+            mPresenter.getForumlist(map)
+
+        }
     }
     override fun onForumlist(data: ArrayList<ForumListEntity>?,pagetotla:Int?) {
 
@@ -79,7 +86,7 @@ class DiscoverFragment : BaseFragment(),DiscoverContract.View {
     }
 
     override fun showError(errorMsg: String, errorCode: Int) {
-        showToast(errorMsg)
+        ShowErrorMes(errorMsg,errorCode)
     }
 
     override fun showLoading() {

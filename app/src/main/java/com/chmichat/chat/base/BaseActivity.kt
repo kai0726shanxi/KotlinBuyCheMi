@@ -16,6 +16,8 @@ import android.widget.Toast
 import com.classic.common.MultipleStatusView
 import com.chmichat.chat.App
 import com.chmichat.chat.R
+import com.chmichat.chat.showToast
+import com.chmichat.chat.ui.activity.LoginActivity
 import io.reactivex.annotations.NonNull
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
@@ -157,6 +159,16 @@ abstract class BaseActivity : AppCompatActivity(),EasyPermissions.PermissionCall
             return mInputMethodManager.hideSoftInputFromWindow(this.currentFocus!!.windowToken, 0)
         }
         return super.onTouchEvent(event)
+    }
+
+
+    fun ShowErrorMes(ems:String,code:Int){
+        if (code==4002){
+            startActivity(Intent(this, LoginActivity::class.java))
+        }else{
+            showToast(ems)
+        }
+
     }
 
 

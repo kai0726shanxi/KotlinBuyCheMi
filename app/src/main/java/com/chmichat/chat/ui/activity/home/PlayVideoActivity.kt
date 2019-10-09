@@ -378,7 +378,7 @@ class PlayVideoActivity : BaseActivity(), PlayVideoContract.View, View.OnClickLi
     }
 
     override fun showError(errmsg: String, code: Int) {
-        showToast(errmsg)
+        ShowErrorMes(errmsg,code)
     }
 
     override fun showLoading() {

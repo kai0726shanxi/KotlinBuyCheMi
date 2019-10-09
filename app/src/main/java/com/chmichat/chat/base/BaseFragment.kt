@@ -1,6 +1,7 @@
 package com.chmichat.chat.base
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.v4.app.Fragment
@@ -13,6 +14,8 @@ import android.widget.EditText
 import android.widget.Toast
 import com.classic.common.MultipleStatusView
 import com.chmichat.chat.App
+import com.chmichat.chat.showToast
+import com.chmichat.chat.ui.activity.LoginActivity
 import io.reactivex.annotations.NonNull
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
@@ -158,5 +161,15 @@ import pub.devrel.easypermissions.EasyPermissions
     fun closeKeyBord(mEditText: EditText, mContext: Context) {
         val imm = mContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(mEditText.windowToken, 0)
+    }
+
+
+    fun ShowErrorMes(ems:String,code:Int){
+        if (code==4002){
+            startActivity(Intent(activity,LoginActivity::class.java))
+        }else{
+            showToast(ems)
+        }
+
     }
 }

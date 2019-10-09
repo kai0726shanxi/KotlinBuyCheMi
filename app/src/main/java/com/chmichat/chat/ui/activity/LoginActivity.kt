@@ -494,7 +494,7 @@ class LoginActivity : BaseActivity(), LoginContract.View, View.OnClickListener {
 
     override fun showError(errorMsg: String, errorCode: Int) {
         //错误信息
-        showToast(errorMsg)
+        ShowErrorMes(errorMsg,errorCode)
     }
 
     override fun onloginMember(data: UserBean?) {

@@ -85,8 +85,7 @@ class ChoseForumActivity : BaseActivity(),ChoseForumContract.View, View.OnClickL
     }
 
     override fun showError(errorMsg: String, errorCode: Int) {
-        showToast(errorMsg)
-    }
+ShowErrorMes(errorMsg,errorCode)    }
 
     override fun showLoading() {
     }

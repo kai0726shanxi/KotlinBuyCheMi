@@ -142,7 +142,7 @@ class HomeCommentFragment : BaseFragment(), CommentListContract.View {
     }
 
     override fun showError(emg: String, code: Int) {
-      showToast(emg)
+       ShowErrorMes(emg,code)
     }
 
     override fun showLoading() {

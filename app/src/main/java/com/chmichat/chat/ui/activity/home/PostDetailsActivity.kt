@@ -1,5 +1,6 @@
 package com.chmichat.chat.ui.activity.home
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.support.v7.widget.LinearLayoutManager
@@ -59,6 +60,7 @@ class PostDetailsActivity : BaseActivity(), PostDetailsContract.View, View.OnCli
 
     override fun initData() {
         mId = intent.getIntExtra(Constants.KEYNAME, 0)
+        mPostListEntity= intent.getSerializableExtra(Constants.KEYTYPE) as PostListEntity?
     }
 
     override fun initView() {
@@ -77,7 +79,18 @@ class PostDetailsActivity : BaseActivity(), PostDetailsContract.View, View.OnCli
         tv_zan.setOnClickListener(this)
         tv_cai.setOnClickListener(this)
 
+        mDialog?.setBtnDataLinsenter(object:ShareDialog.BtnDataLinsenter{
 
+            override fun btndata(str: String) {
+                when(str){
+                    getString(R.string.share_report)->{
+                       /* var intent=Intent(this as PostDetailsActivity,ReportActivity::class.java)
+                        startActivity(intent)*/
+                    }
+                }
+
+            }
+        })
         drawablezan = resources.getDrawable(R.mipmap.home_zan_ic)
         drawablezancheck = resources.getDrawable(R.mipmap.home_zan_red_ic)
         drawablecai = resources.getDrawable(R.mipmap.home_cai_ic)
@@ -136,11 +149,16 @@ class PostDetailsActivity : BaseActivity(), PostDetailsContract.View, View.OnCli
 
     override fun start() {
 
+       if (mPostListEntity!=null){
+           mId=mPostListEntity?.id
+       }
+
         mPresenter.getPostDetails(mId.toString())
         maptui.clear()
         maptui["id"]=mId.toString()
-       mPresenter.getPostRecommendList(maptui)
+        mPresenter.getPostRecommendList(maptui)
         setPushComment()
+
     }
 
     private fun setPushComment() {
@@ -283,7 +301,7 @@ class PostDetailsActivity : BaseActivity(), PostDetailsContract.View, View.OnCli
     }
 
     override fun showError(errormsg: String, code: Int) {
-        showToast(errormsg)
+        ShowErrorMes(errormsg,code)
     }
 
     override fun showLoading() {

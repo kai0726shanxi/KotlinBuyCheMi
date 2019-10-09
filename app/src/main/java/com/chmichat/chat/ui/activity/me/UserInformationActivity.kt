@@ -258,8 +258,7 @@ class UserInformationActivity : BaseActivity(), EditUserInfoContract.View, View.
     }
 
     override fun showError(msg: String, code: Int) {
-        showToast(msg)
-    }
+ShowErrorMes(msg,code)    }
 
     override fun showLoading() {
     }

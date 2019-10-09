@@ -152,7 +152,7 @@ class MeCollectFragment : BaseFragment(), MeCollectContract.View {
     }
 
     override fun showError(errorMsg: String, errorCode: Int) {
-        showToast(errorMsg)
+        ShowErrorMes(errorMsg,errorCode)
     }
 
     override fun showLoading() {

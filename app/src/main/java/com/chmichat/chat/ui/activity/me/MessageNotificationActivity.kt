@@ -28,8 +28,7 @@ class MessageNotificationActivity:BaseActivity(),NotificationManagerContract.Vie
     }
 
     override fun showError(errorMsg: String, errorCode: Int) {
-    showToast("$errorMsg>>$errorCode")
-    }
+ShowErrorMes(errorMsg,errorCode)    }
 
     override fun SwitchDetails(data: NotificationManagerEntity?) {
         //详情

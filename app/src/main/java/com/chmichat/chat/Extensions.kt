@@ -2,6 +2,7 @@ package com.chmichat.chat
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.support.v4.app.Fragment
@@ -13,6 +14,7 @@ import com.chmichat.chat.net.exception.ApiException
 import io.reactivex.Observable
 import android.media.MediaMetadataRetriever
 import android.util.TypedValue
+import com.chmichat.chat.ui.activity.LoginActivity
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -129,7 +131,10 @@ fun <T> Observable<BaseResponse<T>>.dispatchDefault(): Observable<BaseResponse<T
         this.flatMap { tBaseModel ->
             if (tBaseModel.code == 0) {
                 Observable.just(tBaseModel)
-            } else Observable.error(ApiException(Throwable(tBaseModel.msg), tBaseModel.code))
+            } else {
+                Observable.error(ApiException(Throwable(tBaseModel.msg), tBaseModel.code))
+
+            }
         }
 
 

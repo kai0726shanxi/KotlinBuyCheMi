@@ -220,12 +220,13 @@ class DiscoverRecycleVIewFragment : BaseFragment(), DiscoverTabContract.View {
 
 
     override fun showError(errorMsg: String, errorCode: Int) {
-        showToast(errorMsg)
+
         if (errorCode == ErrorStatus.NETWORK_ERROR) {
             mLayoutStatusView?.showNoNetwork()
         } else {
             mLayoutStatusView?.showError()
         }
+        ShowErrorMes(errorMsg,errorCode)
     }
 
     override fun showLoading() {

@@ -5,6 +5,7 @@
     android:layout_height="match_parent">
     <include layout="@layout/title_bar_layout"/>
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
         android:layout_width="@dimen/dp_0"
         android:layout_height="@dimen/dp_0"
         app:layout_constraintLeft_toLeftOf="parent"

@@ -203,7 +203,7 @@ class HomeBBSFragment : BaseFragment(), HomeForumContract.View {
     }
 
     override fun showError(emg: String, code: Int) {
-        showToast(emg)
+       ShowErrorMes(emg,code)
     }
 
     override fun showLoading() {

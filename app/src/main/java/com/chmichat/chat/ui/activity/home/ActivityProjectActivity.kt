@@ -125,8 +125,7 @@ class ActivityProjectActivity : BaseActivity(), DiscoverTabContract.View, View.O
     }
 
     override fun showError(errorMsg: String, errorCode: Int) {
-        showToast(errorMsg)
-    }
+ShowErrorMes(errorMsg,errorCode)    }
 
     override fun showLoading() {
     }

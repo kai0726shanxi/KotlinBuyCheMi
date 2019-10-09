@@ -122,7 +122,7 @@ class AllDynamicActivity : BaseActivity(), AllDynamicContract.View, View.OnClick
     }
 
     override fun showError(errmsg: String, code: Int) {
-        showToast(errmsg)
+      ShowErrorMes(errmsg,code)
     }
 
     override fun showLoading() {

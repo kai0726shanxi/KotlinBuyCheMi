@@ -107,7 +107,7 @@ class MeSettingFragment : BaseFragment(), MeSettingContract.View, View.OnClickLi
     }
 
     override fun showError(msg: String, errorCode: Int) {
-        showToast(msg)
+        ShowErrorMes(msg,errorCode)
     }
 
     override fun setUserInfo(userBean: UserBean?) {

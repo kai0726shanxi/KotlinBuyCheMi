@@ -1,9 +1,14 @@
 package com.chmichat.chat.ui.adapter.homeadapter
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.view.View
+import com.chmichat.chat.Constants
 import com.chmichat.chat.R
 import com.chmichat.chat.bean.PostListEntity
 import com.chmichat.chat.getTime4String
+import com.chmichat.chat.ui.activity.home.PostDetailsActivity
 import com.chmichat.chat.view.recyclerview.ViewHolder
 import com.chmichat.chat.view.recyclerview.adapter.CommonAdapter
 import java.util.*
@@ -32,7 +37,12 @@ class HomePopularAdapter(context: Context, data: ArrayList<PostListEntity>):Comm
 
         }
         holder.setText(R.id.tv_read,data.postStatisticsData?.readingNum.toString())
+        holder.setOnItemClickListener(listener = View.OnClickListener {
+            val intent = Intent(mContext as Activity, PostDetailsActivity::class.java)
+            intent.putExtra(Constants.KEYNAME, data.id)
+            mContext.startActivity(intent)
 
+        })
     }
 
 }

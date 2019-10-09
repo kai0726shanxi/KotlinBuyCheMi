@@ -360,6 +360,7 @@ class ReleaseVideoActivity : BaseActivity(),ReleaseVideoContract.View, View.OnCl
     }
 
     override fun showError(errorMsg: String, errorCode: Int) {
+        ShowErrorMes(errorMsg,errorCode)
     }
 
     override fun showLoading() {

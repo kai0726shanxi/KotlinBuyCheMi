@@ -161,7 +161,7 @@ class HomeIntroductionFragment : BaseFragment(), PostLongVideoContract.View, Vie
     }
 
     override fun showError(errormsg: String, code: Int) {
-        showToast(errormsg)
+        ShowErrorMes(errormsg,code)
     }
 
     override fun showLoading() {

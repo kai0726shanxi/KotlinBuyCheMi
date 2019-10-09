@@ -452,7 +452,7 @@ class MyReleasePostActivity : BaseActivity(), ReleasePostContract.View, View.OnC
     }
 
     override fun showError(errorMsg: String, errorCode: Int) {
-        showToast(errorMsg)
+        ShowErrorMes(errorMsg,errorCode)
     }
 
     override fun showLoading() {

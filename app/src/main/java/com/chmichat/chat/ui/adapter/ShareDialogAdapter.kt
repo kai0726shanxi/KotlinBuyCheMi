@@ -1,6 +1,7 @@
 package com.chmichat.chat.ui.adapter
 
 import android.content.Context
+import android.view.View
 import com.chmichat.chat.R
 import com.chmichat.chat.glide.GlideApp
 import com.chmichat.chat.view.recyclerview.ViewHolder
@@ -11,6 +12,14 @@ import com.chmichat.chat.view.recyclerview.adapter.CommonAdapter
  * @Date 2019/9/20 17:15
  */
 class ShareDialogAdapter(context: Context, list: ArrayList<String>) : CommonAdapter<String>(context, list, R.layout.item_sharedialog_layout) {
+
+
+    private var mOnTagItemClick: ((tag:String) -> Unit)? = null
+
+    fun setOnTagItemClickListener(onTagItemClickListener:(tag:String) -> Unit) {
+        this.mOnTagItemClick = onTagItemClickListener
+    }
+
     override fun bindData(holder: ViewHolder, data: String, position: Int) {
         when (data) {
             mContext.getString(R.string.share_wx) -> {
@@ -58,6 +67,9 @@ class ShareDialogAdapter(context: Context, list: ArrayList<String>) : CommonAdap
 
 
         }
+        holder.setOnItemClickListener(listener = View.OnClickListener {
+            mOnTagItemClick?.invoke(data)
 
+        })
     }
 }

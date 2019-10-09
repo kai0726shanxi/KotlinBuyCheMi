@@ -48,7 +48,7 @@
         android:textSize="@dimen/sp_12"
         android:lines="1"
         android:ellipsize="end"
-        android:text="测试的数据测试的数据测试的数据测试的数据"/>
+        android:text=""/>
     <TextView
         android:id="@+id/tv_num"
         android:layout_width="wrap_content"
@@ -57,7 +57,7 @@
         android:textSize="@dimen/sp_10"
         android:background="@drawable/bg_radius_red"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="99"
+        android:text="0"
         android:gravity="center"
         app:layout_constraintBaseline_toBaselineOf="@+id/tv_content"/>
 

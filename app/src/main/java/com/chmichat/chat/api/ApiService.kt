@@ -325,11 +325,65 @@ interface ApiService {
     @FormUrlEncoded
     @POST("api/goods/goodsHot/getPage")
     fun getGoodsHots(@FieldMap parmer: Map<String, String>): Observable<BaseResponse<ArrayList<SearchGoodsHotBean>>>
+    /**
+     * 系统消息列表
+     *
+     * @param parmer
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("bbs/system/notice/page")
+    fun getsystemlists(@FieldMap parmer: Map<String, String>): Observable<BaseResponse<ArrayList<SystemListMessageEntity>>>
+
+
+    /**
+     * 互动消息列表
+     *
+     * @param parmer
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("bbs/user/interactive/page")
+    fun getinteractlists(@FieldMap parmer: Map<String, String>): Observable<BaseResponse<ArrayList<InteractListMessageEntity>>>
+
+
+
+    /**
+     * 互动已读
+     *
+     * @param parmer
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("bbs/user/interactive/read")
+    fun getSetRead(@FieldMap parmer: Map<String, String>): Observable<BaseResponse<String>>
+
+    /**
+     * 根据评论id获取帖子详情
+     *
+     * @param parmer
+     * @return
+     */
+    @GET("bbs/post/comment/findPost")
+    fun getFindPost(@Query("commentId") id:String): Observable<BaseResponse<PostListEntity>>
+
+
 
     /**
      * 查询个人信息
      */
     @GET("bbs/user/this")
     fun getMeUserInfo(): Observable<BaseResponse<UserBean>>
+
+    /**
+     * 消息最后一条
+     */
+    @GET("bbs/notice/last")
+    fun getLastData(): Observable<BaseResponse<LastMessageEntivity>>
+    /**
+     * 系统消息详情
+     */
+    @GET("bbs/system/notice/details")
+    fun getSystemdetails(@Query("id") id:String): Observable<BaseResponse<SystemListMessageEntity>>
 
 }
