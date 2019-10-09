@@ -1,6 +1,7 @@
 package com.chmichat.chat.ui.activity.home
 
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -28,21 +29,30 @@ import kotlinx.android.synthetic.main.title_bar_layout.*
  * @Date 2019/9/20 9:01
  */
 class PostDetailsActivity : BaseActivity(), PostDetailsContract.View, View.OnClickListener {
+
+
     private val mPresenter: PostDetailsPresenter by lazy { PostDetailsPresenter() }
-    private var mlist = arrayListOf("1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1")
+    private var mlist = ArrayList<PostListEntity>()
     private var mCommentlist = ArrayList<CommentListEntity>()
     private var mPostDetailsCommentAdapter: PostDetailsCommentAdapter? = null
     private var mPostRecommendAdapter: PostRecommendAdapter? = null
     private var mCommentListEntity: CommentListEntity? = null
     private var map = HashMap<String, String>()
+    private var maptui=HashMap<String,String>()
     private var mId: Int? = 0
     private var page: Int = 1
     private var mTotalPage: Int? = 0
     private var isCommentUser: Boolean = false
     private var commentmap = HashMap<String, String>()
+    private var mPostListEntity: PostListEntity? = null
     private var head = "<style>\n" + "  \n" + "img{\n" + " max-width:100%;\n" + " height:auto;\n" + "}\n" + "  \n" + "</style>"
+    private var drawablezan: Drawable? = null
+    private var drawablezancheck: Drawable? = null
+    private var drawablecai: Drawable? = null
+    private var drawablecaicheck: Drawable? = null
 
-    private val mDialog:ShareDialog by lazy { ShareDialog(this) }
+    private var isclickbtn: Boolean? = null
+    private val mDialog: ShareDialog by lazy { ShareDialog(this) }
     override fun layoutId(): Int {
         return R.layout.activity_post_details
     }
@@ -64,6 +74,15 @@ class PostDetailsActivity : BaseActivity(), PostDetailsContract.View, View.OnCli
         iv_left.setOnClickListener(this)
         iv_right.setOnClickListener(this)
         tv_share.setOnClickListener(this)
+        tv_zan.setOnClickListener(this)
+        tv_cai.setOnClickListener(this)
+
+
+        drawablezan = resources.getDrawable(R.mipmap.home_zan_ic)
+        drawablezancheck = resources.getDrawable(R.mipmap.home_zan_red_ic)
+        drawablecai = resources.getDrawable(R.mipmap.home_cai_ic)
+        drawablecaicheck = resources.getDrawable(R.mipmap.home_cai_red_ic)
+
         recycle_recommend.isNestedScrollingEnabled = false
         recycle_comment.isNestedScrollingEnabled = false
         mPostRecommendAdapter = PostRecommendAdapter(this, mlist)
@@ -71,10 +90,10 @@ class PostDetailsActivity : BaseActivity(), PostDetailsContract.View, View.OnCli
         recycle_recommend.layoutManager = LinearLayoutManager(this)
         mPostDetailsCommentAdapter = PostDetailsCommentAdapter(this, mCommentlist)
         mPostDetailsCommentAdapter?.setOnTitleItemClickListener {
-            mCommentListEntity=it
-            isCommentUser=true
+            mCommentListEntity = it
+            isCommentUser = true
             et_content.requestFocus()
-            openKeyBord(et_content,this)
+            openKeyBord(et_content, this)
         }
         recycle_comment.adapter = mPostDetailsCommentAdapter
         recycle_comment.layoutManager = LinearLayoutManager(this)
@@ -118,7 +137,9 @@ class PostDetailsActivity : BaseActivity(), PostDetailsContract.View, View.OnCli
     override fun start() {
 
         mPresenter.getPostDetails(mId.toString())
-        //   mPresenter.getPostRecommendList(map)
+        maptui.clear()
+        maptui["id"]=mId.toString()
+       mPresenter.getPostRecommendList(maptui)
         setPushComment()
     }
 
@@ -141,8 +162,30 @@ class PostDetailsActivity : BaseActivity(), PostDetailsContract.View, View.OnCli
 
 
             }
-            R.id.tv_share->{
+            R.id.tv_share -> {
                 mDialog.show()
+            }
+            R.id.tv_zan -> {
+                map.clear()
+                map["postId"] = mId.toString()
+                if (isclickbtn == true) {
+                    mPresenter.getCancelPraisePost(map)
+                } else {
+                    mPresenter.getPraisePost(map)
+
+                }
+            }
+            R.id.tv_cai -> {
+                map.clear()
+                map["postId"] = mId.toString()
+                if (isclickbtn==false) {
+                    mPresenter.getCancelPraisePost(map)
+
+                } else {
+                    mPresenter.getTreaPost(map)
+
+                }
+
             }
         }
 
@@ -150,7 +193,7 @@ class PostDetailsActivity : BaseActivity(), PostDetailsContract.View, View.OnCli
 
 
     override fun onPostDetails(data: PostListEntity?) {
-
+        mPostListEntity = data
         setViewData(data)
 
 
@@ -168,10 +211,50 @@ class PostDetailsActivity : BaseActivity(), PostDetailsContract.View, View.OnCli
         tv_cai.text = data?.postStatisticsData?.treadNum.toString()
         tv_content.loadDataWithBaseURL(UrlConstant.BASE_URL, head + data?.content, "text/html", "UTF-8", "about:blank")
 
+        showiconColor()
+
 
     }
 
+    private fun showiconColor() {
+        if (mPostListEntity?.userPostOperation != null) {
+            when {
+                mPostListEntity?.userPostOperation?.praise == true -> {
+                    isclickbtn = true
+                    tv_zan.setCompoundDrawablesWithIntrinsicBounds(drawablezancheck, null, null, null)
+                    tv_cai.setCompoundDrawablesWithIntrinsicBounds(drawablecai, null, null, null)
+
+                }
+                mPostListEntity?.userPostOperation?.praise == false -> {
+                    isclickbtn = false
+                    tv_cai.setCompoundDrawablesWithIntrinsicBounds(drawablecaicheck, null, null, null)
+                    tv_zan.setCompoundDrawablesWithIntrinsicBounds(drawablezan, null, null, null)
+
+                }
+                else -> {
+                    tv_cai.setCompoundDrawablesWithIntrinsicBounds(drawablecai, null, null, null)
+                    tv_zan.setCompoundDrawablesWithIntrinsicBounds(drawablezan, null, null, null)
+                }
+            }
+        }else{
+            if (isclickbtn == true) {
+                tv_zan.setCompoundDrawablesWithIntrinsicBounds(drawablezancheck, null, null, null)
+                tv_cai.setCompoundDrawablesWithIntrinsicBounds(drawablecai, null, null, null)
+
+            } else if (isclickbtn == false) {
+                tv_cai.setCompoundDrawablesWithIntrinsicBounds(drawablecaicheck, null, null, null)
+                tv_zan.setCompoundDrawablesWithIntrinsicBounds(drawablezan, null, null, null)
+            } else{
+                tv_zan.setCompoundDrawablesWithIntrinsicBounds(drawablezan, null, null, null)
+                tv_cai.setCompoundDrawablesWithIntrinsicBounds(drawablecai, null, null, null)
+            }
+        }
+    }
+
     override fun onPostRecommendList(data: ArrayList<PostListEntity>?) {
+        if(data!=null){
+            mPostRecommendAdapter?.addDataNew(data)
+        }
     }
 
     override fun onPostCommentList(data: ArrayList<CommentListEntity>?, totalpage: Int?) {
@@ -190,9 +273,9 @@ class PostDetailsActivity : BaseActivity(), PostDetailsContract.View, View.OnCli
     }
 
     override fun onPostSendComment(data: String?) {
-        if (isCommentUser){
-            isCommentUser=false
-            mCommentListEntity=null
+        if (isCommentUser) {
+            isCommentUser = false
+            mCommentListEntity = null
         }
         showToast("发送成功，待审核")
         et_content.setText("")
@@ -208,4 +291,52 @@ class PostDetailsActivity : BaseActivity(), PostDetailsContract.View, View.OnCli
 
     override fun dismissLoading() {
     }
+
+    override fun onPraisePost(data: String?) {
+        //点赞成功
+        mPostListEntity?.postStatisticsData?.praiseNum = mPostListEntity?.postStatisticsData?.praiseNum?.plus(1)
+        tv_zan.text = mPostListEntity?.postStatisticsData?.praiseNum.toString()
+        if (isclickbtn == false) {
+            mPostListEntity?.postStatisticsData?.treadNum = mPostListEntity?.postStatisticsData?.treadNum?.minus(1)
+            tv_cai.text = mPostListEntity?.postStatisticsData?.treadNum.toString()
+        }
+
+
+        mPostListEntity?.userPostOperation?.praise = true
+        isclickbtn = true
+        showiconColor()
+    }
+
+    override fun onTreadPost(data: String?) {
+//已踩
+        mPostListEntity?.postStatisticsData?.treadNum = mPostListEntity?.postStatisticsData?.treadNum?.plus(1)
+        tv_cai.text = mPostListEntity?.postStatisticsData?.treadNum.toString()
+        if (isclickbtn == true) {
+            mPostListEntity?.postStatisticsData?.praiseNum = mPostListEntity?.postStatisticsData?.praiseNum?.minus(1)
+            tv_zan.text = mPostListEntity?.postStatisticsData?.praiseNum.toString()
+        }
+        mPostListEntity?.userPostOperation?.praise = false
+        isclickbtn = false
+        showiconColor()
+
+    }
+
+    override fun onCancel(data: String?) {
+        //取消点赞或者踩
+        if (isclickbtn == true) {
+            mPostListEntity?.postStatisticsData?.praiseNum = mPostListEntity?.postStatisticsData?.praiseNum?.minus(1)
+            tv_zan.text = mPostListEntity?.postStatisticsData?.praiseNum.toString()
+
+        } else if (isclickbtn == false) {
+            mPostListEntity?.postStatisticsData?.treadNum = mPostListEntity?.postStatisticsData?.treadNum?.minus(1)
+            tv_cai.text = mPostListEntity?.postStatisticsData?.treadNum.toString()
+        }
+
+
+        mPostListEntity?.userPostOperation?.praise = null
+        isclickbtn = null
+        showiconColor()
+
+    }
+
 }

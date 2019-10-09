@@ -3,6 +3,7 @@ package com.chmichat.chat.mvp.presenter.home
 import com.chmichat.chat.base.BasePresenter
 import com.chmichat.chat.mvp.contract.home.PostLongVideoContract
 import com.chmichat.chat.mvp.model.home.PosteDetailsModel
+import com.chmichat.chat.mvp.model.home.PosteLongVideoModel
 import com.chmichat.chat.net.exception.ExceptionHandle
 
 /**
@@ -13,7 +14,7 @@ import com.chmichat.chat.net.exception.ExceptionHandle
 class PostLongVideoPresenter : BasePresenter<PostLongVideoContract.View>(), PostLongVideoContract.Presenter {
 
 
-    private val longmodel: PosteDetailsModel by lazy { PosteDetailsModel() }
+    private val longmodel: PosteLongVideoModel by lazy { PosteLongVideoModel() }
 
     //详情
     override fun getPostDetails(map:String) {
@@ -44,11 +45,11 @@ class PostLongVideoPresenter : BasePresenter<PostLongVideoContract.View>(), Post
         checkViewAttached()
         mRootView?.showLoading()
 
-        val disposable = longmodel.getPostComment(map)
+        val disposable = longmodel.getPostRecommendList(map)
                 .subscribe({ data ->
                     mRootView?.apply {
                         dismissLoading()
-                        //onPostRecommendList(data.data)
+                        onPostRecommendList(data.data)
                     }
                 }, { throwable ->
                     mRootView?.apply {
@@ -59,5 +60,86 @@ class PostLongVideoPresenter : BasePresenter<PostLongVideoContract.View>(), Post
         addSubscription(disposable)
     }
 
+    //收藏板块
+    override fun getCollectPostData(map: Map<String, String>) {
+        checkViewAttached()
+        mRootView?.showLoading()
 
+        val disposable = longmodel.getCollectPost(map)
+                .subscribe({ data ->
+                    mRootView?.apply {
+                        dismissLoading()
+                        onCollectPost(data.data)
+                    }
+                }, { throwable ->
+                    mRootView?.apply {
+                        //处理异常
+                        showError(ExceptionHandle.handleException(throwable), ExceptionHandle.errorCode)
+                    }
+                })
+        addSubscription(disposable)
+    }
+
+    //取消收藏板块
+    override fun getConcelCollectPostData(map: Map<String, String>) {
+
+        checkViewAttached()
+        mRootView?.showLoading()
+
+        val disposable = longmodel.getCancelCollectPost(map)
+                .subscribe({ data ->
+                    mRootView?.apply {
+                        dismissLoading()
+                        onCancelCollectPost(data.data)
+                    }
+                }, { throwable ->
+                    mRootView?.apply {
+                        //处理异常
+                        showError(ExceptionHandle.handleException(throwable), ExceptionHandle.errorCode)
+                    }
+                })
+        addSubscription(disposable)
+    }
+
+    //点赞
+    override fun getPraisePost(map: Map<String, String>) {
+
+        checkViewAttached()
+        mRootView?.showLoading()
+
+        val disposable = longmodel.getPraisePost(map)
+                .subscribe({ data ->
+                    mRootView?.apply {
+                        dismissLoading()
+                        onpraisePost(data.data)
+                    }
+                }, { throwable ->
+                    mRootView?.apply {
+                        //处理异常
+                        showError(ExceptionHandle.handleException(throwable), ExceptionHandle.errorCode)
+                    }
+                })
+        addSubscription(disposable)
+    }
+
+    //取消点赞
+    override fun getCancelPraisePost(map: Map<String, String>) {
+
+        checkViewAttached()
+        mRootView?.showLoading()
+
+        val disposable = longmodel.getCancelPraisePost(map)
+                .subscribe({ data ->
+                    mRootView?.apply {
+                        dismissLoading()
+                        onCancelPraisePost(data.data)
+                    }
+                }, { throwable ->
+                    mRootView?.apply {
+                        //处理异常
+                        showError(ExceptionHandle.handleException(throwable), ExceptionHandle.errorCode)
+                    }
+                })
+        addSubscription(disposable)
+    }
 }

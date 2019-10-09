@@ -37,6 +37,7 @@ class Constants private constructor() {
         val FILE_WATCH_HISTORY_NAME = "watch_history_file"   //观看记录
 
         val FILE_COLLECTION_NAME = "collection_file"    //收藏视屏缓存的文件名
+        val HISTORYSEARCH="historysearch"//搜索历史记录
         val KEYNAME="key_name"//传值的名称
         val KEYID="key_id"//传值的id
         val KEYADDRESS="keyaddress"//传地址
@@ -53,7 +54,6 @@ class Constants private constructor() {
         val SETADDRESS=1001 //设置地址
         val CHOOSE_VIDEO = 1002//小视频回调
         val SETISVISIVLE=1003//设置是否可见
-
         val ISVISIBLE="isvisible"
     }
 }

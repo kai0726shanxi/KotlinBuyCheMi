@@ -14,6 +14,6 @@ interface ChoseForumContract {
 
     }
     interface Presenter{
-        fun getForumlist(map: Map<String,String>)
+        fun getForumlist(map: Map<String,String?>)
     }
 }

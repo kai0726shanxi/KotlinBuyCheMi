@@ -9,6 +9,7 @@ import com.chmichat.chat.bean.CommentListEntity
 import com.chmichat.chat.mvp.contract.home.CommentListContract
 import com.chmichat.chat.mvp.presenter.home.CommentListPresenter
 import com.chmichat.chat.showToast
+import com.chmichat.chat.ui.activity.add.ReleaseLongVideoActivity
 import com.chmichat.chat.ui.adapter.homeadapter.HomeCommentAdapter
 import kotlinx.android.synthetic.main.fragment_home_comment.*
 
@@ -28,6 +29,7 @@ class HomeCommentFragment : BaseFragment(), CommentListContract.View {
     private var mTotalPage: Int? = 0
     private var isCommentUser:Boolean=false
     private var mCommentListEntity:CommentListEntity?=null
+    private var mActivity:ReleaseLongVideoActivity?=null
 
     var mHomeCommentAdapter: HomeCommentAdapter? = null
 
@@ -44,6 +46,7 @@ class HomeCommentFragment : BaseFragment(), CommentListContract.View {
     override fun getLayoutId(): Int = R.layout.fragment_home_comment
 
     override fun initView() {
+        mActivity=activity as ReleaseLongVideoActivity?
         mPresenter.attachView(this)
         mHomeCommentAdapter = activity?.let { HomeCommentAdapter(it, mlist) }
         mHomeCommentAdapter?.setOnTitleItemClickListener {
@@ -111,8 +114,9 @@ class HomeCommentFragment : BaseFragment(), CommentListContract.View {
         setpushdata()
     }
 
-    override fun onCommentlist(data: ArrayList<CommentListEntity>?, totalpage: Int?) {
+    override fun onCommentlist(data: ArrayList<CommentListEntity>?, totalpage: Int?,num:Int?) {
         mTotalPage = totalpage
+        mActivity?.setcommentnum(num)
         if (data != null) {
 
             if (page == 1) {

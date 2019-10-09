@@ -10,7 +10,7 @@ import com.chmichat.chat.bean.CommentListEntity
  */
 interface CommentListContract {
     interface View:IBaseView{
-        fun onCommentlist(data:ArrayList<CommentListEntity>?, totalpage:Int?)
+        fun onCommentlist(data:ArrayList<CommentListEntity>?, totalpage:Int?,itemnum:Int?)
         fun onPushComment(data:String?)
         fun showError(emg:String,code:Int)
     }

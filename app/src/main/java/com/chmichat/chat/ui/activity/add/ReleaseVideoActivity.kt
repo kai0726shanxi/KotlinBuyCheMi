@@ -239,8 +239,9 @@ class ReleaseVideoActivity : BaseActivity(),ReleaseVideoContract.View, View.OnCl
             R.id.iv_left->finish()
             R.id.tv_classify_content -> {
 
-                startActivityForResult(Intent(this, ChoseForumActivity::class.java), Constants.CHOSEFORUM)
-
+                var  intent =Intent(this,ChoseForumActivity::class.java)
+                intent.putExtra(Constants.KEYTYPE,"3")
+                startActivityForResult(intent,Constants.CHOSEFORUM)
                 //mDrawerLayout.openDrawer(Gravity.END)
             }
             R.id.tv_address_content -> {

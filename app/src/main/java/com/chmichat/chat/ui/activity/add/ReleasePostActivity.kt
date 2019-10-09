@@ -141,8 +141,9 @@ class ReleasePostActivity : BaseActivity(), View.OnClickListener {
 
             R.id.iv_classify-> {
                 //分类
-                startActivityForResult(Intent(this, ChoseForumActivity::class.java), Constants.CHOSEFORUM)
-
+                var  intent =Intent(this,ChoseForumActivity::class.java)
+                intent.putExtra(Constants.KEYTYPE,"2")
+                startActivityForResult(intent,Constants.CHOSEFORUM)
             }
             R.id.iv_address -> {
                 //地址

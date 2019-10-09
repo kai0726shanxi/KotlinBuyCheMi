@@ -202,7 +202,7 @@ interface ApiService {
      */
     @FormUrlEncoded
     @POST("bbs/forum/section/getPage")
-    fun getSectionlist(@FieldMap parmer: Map<String, String>): Observable<BaseResponse<ArrayList<ForumListEntity>>>
+    fun getSectionlist(@FieldMap parmer: Map<String, String?>): Observable<BaseResponse<ArrayList<ForumListEntity>>>
     /**
      *论坛详情
      * @param parmer
@@ -279,8 +279,17 @@ interface ApiService {
     @FormUrlEncoded
     @POST("bbs/user/action/praise")
     fun getpraisePost(@FieldMap parmer: Map<String, String>): Observable<BaseResponse<String>>
+
     /**
-     *取消赞
+     *赞帖子
+     * @param parmer
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("bbs/user/action/tread")
+    fun gettreadPost(@FieldMap parmer: Map<String, String>): Observable<BaseResponse<String>>
+    /**
+     *取消赞或者踩
      * @param parmer
      * @return
      */
@@ -297,7 +306,25 @@ interface ApiService {
     @POST("bbs/user/collection/cancelSection")
     fun getCancleCollectionPlate(@FieldMap parmer: Map<String, String>): Observable<BaseResponse<String>>
 
+    /**
+     *推荐帖子板块
+     * @param parmer
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("bbs/forum/post/related/suggestion")
+    fun getPostRelatedList(@FieldMap parmer: Map<String, String>): Observable<BaseResponse<ArrayList<PostListEntity>>>
 
+
+    /**
+     * 热门推荐(搜索)
+     *
+     * @param parmer
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/goods/goodsHot/getPage")
+    fun getGoodsHots(@FieldMap parmer: Map<String, String>): Observable<BaseResponse<ArrayList<SearchGoodsHotBean>>>
 
     /**
      * 查询个人信息

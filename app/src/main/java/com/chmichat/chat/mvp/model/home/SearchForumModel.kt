@@ -1,6 +1,6 @@
-package com.chmichat.chat.mvp.model.add
+package com.chmichat.chat.mvp.model.home
 
-import com.chmichat.chat.bean.ForumListEntity
+import com.chmichat.chat.bean.SearchGoodsHotBean
 import com.chmichat.chat.dispatchDefault
 import com.chmichat.chat.net.BaseResponse
 import com.chmichat.chat.net.RetrofitManager
@@ -9,16 +9,16 @@ import io.reactivex.Observable
 
 /**
  * @Author 20342
- * @Date 2019/9/10 16:21
+ * @Date 2019/10/8 10:48
  */
-class ChoseForumModel {
+class SearchForumModel {
     /**
-     * 获取论坛版块
+     * 热门推荐
      */
-    fun getForumList(map: Map<String,String?>): Observable<BaseResponse<ArrayList<ForumListEntity>>> {
+    fun getSearchForumHots(map: Map<String,String>): Observable<BaseResponse<ArrayList<SearchGoodsHotBean>>> {
 
 
-        return RetrofitManager.service.getSectionlist(map)
+        return RetrofitManager.service.getGoodsHots(map)
                 .dispatchDefault()
                 .compose(SchedulerUtils.ioToMain())
     }

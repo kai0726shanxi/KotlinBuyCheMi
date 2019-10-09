@@ -39,7 +39,7 @@ class PlayvideoPresenter : BasePresenter<PlayVideoContract.View>(), PlayVideoCon
         checkViewAttached()
         mRootView?.showLoading()
 
-        val disposable = mPostModel.getCollectPost(map)
+        val disposable = mPostModel.getCancelCollectPost(map)
                 .subscribe({ data ->
                     mRootView?.apply {
                         dismissLoading()

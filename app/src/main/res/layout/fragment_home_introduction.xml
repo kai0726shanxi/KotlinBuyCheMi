@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cl_bg"
     android:layout_width="match_parent"
@@ -7,11 +8,13 @@
     android:background="@color/white"
     android:focusable="true"
     app:srlEnableRefresh="false"
+    app:srlEnableAutoLoadMore="false"
     android:focusableInTouchMode="true">
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:overScrollMode="never">
         <android.support.constraint.ConstraintLayout
             android:id="@+id/cl_bar"
             android:layout_width="match_parent"
@@ -147,4 +150,4 @@
 
 
 
-</com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</android.support.constraint.ConstraintLayout>

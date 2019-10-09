@@ -28,12 +28,14 @@ class ChoseForumActivity : BaseActivity(),ChoseForumContract.View, View.OnClickL
     private val mPresenter by lazy { ChoseForumPresenter() }
     private var mChoseForumAdapter: ChoseForumAdapter? = null
     private val mlist = ArrayList<ForumListEntity>()
-    private var map=HashMap<String,String>()
+    private var map=HashMap<String,String?>()
+    private var mtype:String?=""
     override fun layoutId(): Int {
 
         return R.layout.activity_chose_forum
     }
     override fun initData() {
+        mtype=intent.getStringExtra(Constants.KEYTYPE)
     }
 
     override fun initView() {
@@ -58,6 +60,11 @@ class ChoseForumActivity : BaseActivity(),ChoseForumContract.View, View.OnClickL
     }
 
     override fun start() {
+        map.clear()
+        if (mtype!=null&&!mtype.equals("")){
+            map["postType"]=mtype
+
+        }
         mPresenter.getForumlist(map)
     }
 

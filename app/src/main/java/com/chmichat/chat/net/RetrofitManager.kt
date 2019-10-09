@@ -1,5 +1,6 @@
 package com.chmichat.chat.net
 
+import android.util.Log
 import com.chmichat.chat.App
 import com.chmichat.chat.Constants
 import com.chmichat.chat.api.ApiService
@@ -104,7 +105,10 @@ object RetrofitManager{
 
     private fun getOkHttpClient(): OkHttpClient {
         //添加一个log拦截器,打印所有的log
-        val httpLoggingInterceptor = HttpLoggingInterceptor()
+        val httpLoggingInterceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger {
+            Log.e(">>Log>",it)
+
+        })
         //可以设置请求过滤的水平,body,basic,headers
         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
 
@@ -115,7 +119,7 @@ object RetrofitManager{
         return OkHttpClient.Builder()
               //  .addInterceptor(addQueryParameterInterceptor())  //参数添加
                 .addInterceptor(addHeaderInterceptor()) // token过滤
-//              .addInterceptor(addCacheInterceptor())
+     //       .addInterceptor(addCacheInterceptor())
                 .addInterceptor(httpLoggingInterceptor) //日志,所有的请求响应度看到
                 .cache(cache)  //添加缓存
                 .connectTimeout(60L, TimeUnit.SECONDS)

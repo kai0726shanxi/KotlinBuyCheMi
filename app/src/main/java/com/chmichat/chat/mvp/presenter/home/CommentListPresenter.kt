@@ -22,7 +22,7 @@ class CommentListPresenter :BasePresenter<CommentListContract.View>(),CommentLis
                 .subscribe({ data ->
                     mRootView?.apply {
                         dismissLoading()
-                        onCommentlist(data.data,data.pageCount)
+                        onCommentlist(data.data,data.pageCount,data.pageTotal)
                     }
                 }, { throwable ->
                     mRootView?.apply {

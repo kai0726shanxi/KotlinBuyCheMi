@@ -37,7 +37,7 @@ class ReleaseImageTextActivity : BaseActivity(), ImageTextContract.View, View.On
 
     private var imgagepath: String? = ""
     private var ImageUrl: String? = ""
-    private var limit = 200
+    private var limit = 300
     //  用来记录输入字符的时候光标的位置
     private var cursor = 0
     // 用来标注输入某一内容之前的编辑框中的内容的长度
@@ -158,8 +158,9 @@ class ReleaseImageTextActivity : BaseActivity(), ImageTextContract.View, View.On
                 meditdialog.show()
             }
             R.id.tv_lun_content -> {
-
-                startActivityForResult(Intent(this, ChoseForumActivity::class.java), Constants.CHOSEFORUM)
+                var  intent =Intent(this,ChoseForumActivity::class.java)
+                intent.putExtra(Constants.KEYTYPE,"1")
+                startActivityForResult(intent,Constants.CHOSEFORUM)
             }
             R.id.tv_address_content -> {
                 startActivityForResult(Intent(this, SetAddressActivity::class.java), Constants.SETADDRESS)

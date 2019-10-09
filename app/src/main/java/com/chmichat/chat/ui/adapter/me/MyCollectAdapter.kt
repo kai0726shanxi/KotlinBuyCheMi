@@ -10,8 +10,10 @@ import com.chmichat.chat.api.UrlConstant
 import com.chmichat.chat.bean.PostListEntity
 import com.chmichat.chat.getTime4String
 import com.chmichat.chat.glide.GlideApp
+import com.chmichat.chat.ui.activity.add.ReleaseLongVideoActivity
 import com.chmichat.chat.ui.activity.home.AllDynamicActivity
 import com.chmichat.chat.ui.activity.home.PlayVideoActivity
+import com.chmichat.chat.ui.activity.home.PostDetailsActivity
 import com.chmichat.chat.view.recyclerview.MultipleType
 import com.chmichat.chat.view.recyclerview.ViewHolder
 import com.chmichat.chat.view.recyclerview.adapter.CommonAdapter
@@ -86,7 +88,11 @@ class MyCollectAdapter(context: Context, data: ArrayList<PostListEntity>) : Comm
                  holder.setText(R.id.tv_source,"来自  "+data.sectionName)
                 holder.setText(R.id.tv_comment,data.commentsNum.toString())
                 holder.setText(R.id.tv_zan,data.praiseNum.toString())
-
+                holder.setOnItemClickListener(View.OnClickListener {
+                    val intent = Intent(mContext as Activity, PostDetailsActivity::class.java)
+                    intent.putExtra(Constants.KEYNAME,mData[position].collectionId)
+                    mContext.startActivity(intent)
+                })
             }
             3 -> {
                 GlideApp.with(mContext)
@@ -129,6 +135,13 @@ class MyCollectAdapter(context: Context, data: ArrayList<PostListEntity>) : Comm
                 holder.setText(R.id.tv_share, data.shareNum.toString())
                 holder.setText(R.id.tv_comment, data.commentsNum.toString())
                 holder.setText(R.id.tv_zan,data.praiseNum.toString())
+                holder.setOnItemClickListener(listener = View.OnClickListener {
+                    val intent = Intent(mContext as Activity, ReleaseLongVideoActivity::class.java)
+                    intent.putExtra(Constants.PLAYLIST, mData[position])
+                    intent.putExtra(Constants.KEYTYPE,"me")
+                    mContext.startActivity(intent)
+                })
+
             }
 
 

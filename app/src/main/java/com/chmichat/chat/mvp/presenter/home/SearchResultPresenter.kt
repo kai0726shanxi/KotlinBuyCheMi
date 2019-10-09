@@ -1,29 +1,26 @@
-package com.chmichat.chat.mvp.presenter.add
+package com.chmichat.chat.mvp.presenter.home
 
 import com.chmichat.chat.base.BasePresenter
-import com.chmichat.chat.mvp.contract.add.ChoseForumContract
-import com.chmichat.chat.mvp.model.add.ChoseForumModel
+import com.chmichat.chat.mvp.contract.home.SearchResultContract
+import com.chmichat.chat.mvp.model.home.SearchResultModel
 import com.chmichat.chat.net.exception.ExceptionHandle
 
 /**
  * @Author 20342
- * @Date 2019/9/10 16:25
+ * @Date 2019/10/8 11:37
  */
-class ChoseForumPresenter:BasePresenter<ChoseForumContract.View>(),ChoseForumContract.Presenter {
+class SearchResultPresenter:BasePresenter<SearchResultContract.View>(),SearchResultContract.Presenter {
 
-
-    private val chosemodel:ChoseForumModel by lazy {
-        ChoseForumModel()
-    }
-    override fun getForumlist(map: Map<String, String?>) {
+   private val mModel :SearchResultModel by lazy { SearchResultModel() }
+    override fun getSearchDatas(map: Map<String, String>) {
         checkViewAttached()
         mRootView?.showLoading()
 
-        val disposable = chosemodel.getForumList(map)
+        val disposable = mModel.getSearchPostList(map)
                 .subscribe({ data ->
                     mRootView?.apply {
                         dismissLoading()
-                        onForumlist(data.data)
+                        onSearchPosts(data.data,data.pageCount)
                     }
                 }, { throwable ->
                     mRootView?.apply {
@@ -32,5 +29,6 @@ class ChoseForumPresenter:BasePresenter<ChoseForumContract.View>(),ChoseForumCon
                     }
                 })
         addSubscription(disposable)
+
     }
 }

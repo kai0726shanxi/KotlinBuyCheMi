@@ -37,20 +37,20 @@ import kotlin.collections.HashMap
  * @Author 20342
  * @Date 2019/8/14 12:07
  */
-class UserInformationActivity : BaseActivity(),EditUserInfoContract.View, View.OnClickListener {
+class UserInformationActivity : BaseActivity(), EditUserInfoContract.View, View.OnClickListener {
 
 
     private val mPresenter by lazy { EditUserInfoPresenter() }
-    private var isPushImage:Boolean=false
-    private var map=HashMap<String,String>()
-     private var userBean:UserBean?=null
-    private var tvsex:String?=""
+    private var isPushImage: Boolean = false
+    private var map = HashMap<String, String>()
+    private var userBean: UserBean? = null
+    private var tvsex: String? = ""
     override fun layoutId(): Int {
         return R.layout.activity_uesr_information
     }
 
     override fun initData() {
-        userBean=SpUtil.getObject(this,Constants.USERBEAN)
+        userBean = SpUtil.getObject(this, Constants.USERBEAN)
     }
 
     private var pvTime: TimePickerView? = null
@@ -61,25 +61,25 @@ class UserInformationActivity : BaseActivity(),EditUserInfoContract.View, View.O
         iv_left.visibility = View.VISIBLE
         iv_left.setColorFilter(Color.BLACK)
         tv_title.setTextColor(Color.BLACK)
-        tv_title.text="编辑个人资料"
-        tv_right.visibility=View.VISIBLE
-        tv_right.setTextColor(ContextCompat.getColor(this,R.color.displaynomal))
-        tv_right.text="保存"
+        tv_title.text = "编辑个人资料"
+        tv_right.visibility = View.VISIBLE
+        tv_right.setTextColor(ContextCompat.getColor(this, R.color.displaynomal))
+        tv_right.text = "保存"
         cl_bar.setBackgroundColor(Color.WHITE)
         mPresenter.attachView(this)
 
         GlideApp.with(this)
-                .load(UrlConstant.BASE_URL_IMAGE+userBean?.id+".png")
+                .load(UrlConstant.BASE_URL_IMAGE + userBean?.id + ".png")
                 .placeholder(R.mipmap.head_ic)
                 .into(iv_head)
         tv_name_content.setText(userBean?.nickname)
-        if (userBean?.userGender==2){
+        if (userBean?.userGender == 2) {
             tv_sex_content.text = "女"
 
-        }else if (userBean?.userGender==1){
+        } else if (userBean?.userGender == 1) {
             tv_sex_content.text = "男"
 
-        }else{
+        } else {
             tv_sex_content.text = "保密"
 
         }
@@ -93,20 +93,20 @@ class UserInformationActivity : BaseActivity(),EditUserInfoContract.View, View.O
         tv_sex_content.setOnClickListener(this)
         iv_head.setOnClickListener(this)
         tv_right.setOnClickListener(this)
-        mChoseDialog.setBtnDataLinsenter(object :ChoseSexDialog.BtnDataLinsenter{
+        mChoseDialog.setBtnDataLinsenter(object : ChoseSexDialog.BtnDataLinsenter {
             override fun btndata(str: String) {
-             tv_sex_content.text=str
+                tv_sex_content.text = str
             }
         })
-        mChosepicDialog.setBtnDataLinsenter(object :ChosepictureDialog.BtnDataLinsenter{
+        mChosepicDialog.setBtnDataLinsenter(object : ChosepictureDialog.BtnDataLinsenter {
             override fun btndata(str: String) {
-               if (str.isNullOrEmpty()){
-                   return
-               }
-                if (str == "1"){
+                if (str.isNullOrEmpty()) {
+                    return
+                }
+                if (str == "1") {
                     //打开相机
                     opencamera()
-                }else if (str=="2") {
+                } else if (str == "2") {
                     //打开相册
                     openpicture()
 
@@ -116,7 +116,7 @@ class UserInformationActivity : BaseActivity(),EditUserInfoContract.View, View.O
 
 
         pvTime = TimePickerBuilder(this, OnTimeSelectListener { date, _ ->
-           tv_age_content.text=simpleDateFormat.format(date)
+            tv_age_content.text = simpleDateFormat.format(date)
         }).setDecorView(
                 window.decorView.findViewById(android.R.id.content))
                 .setCancelText("取消")//取消按钮文字
@@ -137,28 +137,31 @@ class UserInformationActivity : BaseActivity(),EditUserInfoContract.View, View.O
 
     }
 
- private fun opencamera(){
-     PictureSelector.create(this)
-             .openCamera(PictureMimeType.ofImage())
-             .enableCrop(true)// 是否裁剪 true or false
-             .compress(true)// 是否压缩 true or
-             .showCropFrame(true)// 是否显示裁剪矩形边框 圆形裁剪时建议设为false   true or false
-             .showCropGrid(false)// 是否显示裁剪矩形网格 圆形裁剪时建议设为false    true or false
-             .forResult(PictureConfig.CHOOSE_REQUEST) }
- private fun  openpicture(){
-     PictureSelector.create(this)
-             .openGallery(PictureMimeType.ofImage())
-             .isCamera(false)// 是否显示拍照按钮 true or false
-             .enableCrop(true)// 是否裁剪 true or false
-             .compress(true)// 是否压缩 true or
-             .showCropFrame(true)// 是否显示裁剪矩形边框 圆形裁剪时建议设为false   true or false
-             .showCropGrid(false)// 是否显示裁剪矩形网格 圆形裁剪时建议设为false    true or false
-             .forResult(PictureConfig.CHOOSE_REQUEST)
+    private fun opencamera() {
+        PictureSelector.create(this)
+                .openCamera(PictureMimeType.ofImage())
+                .enableCrop(true)// 是否裁剪 true or false
+                .compress(true)// 是否压缩 true or
+                .showCropFrame(true)// 是否显示裁剪矩形边框 圆形裁剪时建议设为false   true or false
+                .showCropGrid(false)// 是否显示裁剪矩形网格 圆形裁剪时建议设为false    true or false
+                .forResult(PictureConfig.CHOOSE_REQUEST)
+    }
 
- }
+    private fun openpicture() {
+        PictureSelector.create(this)
+                .openGallery(PictureMimeType.ofImage())
+                .isCamera(false)// 是否显示拍照按钮 true or false
+                .enableCrop(true)// 是否裁剪 true or false
+                .compress(true)// 是否压缩 true or
+                .showCropFrame(true)// 是否显示裁剪矩形边框 圆形裁剪时建议设为false   true or false
+                .showCropGrid(false)// 是否显示裁剪矩形网格 圆形裁剪时建议设为false    true or false
+                .forResult(PictureConfig.CHOOSE_REQUEST)
+
+    }
+
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.tv_right->{
+            R.id.tv_right -> {
                 pushdata()
             }
 
@@ -167,17 +170,17 @@ class UserInformationActivity : BaseActivity(),EditUserInfoContract.View, View.O
             }
             R.id.tv_age_content -> {
                 hintKbTwo(this)
-               pvTime!!.show()
+                pvTime!!.show()
             }
             R.id.tv_sex_content -> {
                 hintKbTwo(this)
 
                 mChoseDialog.show()
             }
-            R.id.iv_head->{
+            R.id.iv_head -> {
                 hintKbTwo(this)
 
-                if(!mChosepicDialog.isShowing){
+                if (!mChosepicDialog.isShowing) {
                     mChosepicDialog.show()
 
                 }
@@ -187,29 +190,29 @@ class UserInformationActivity : BaseActivity(),EditUserInfoContract.View, View.O
     }
 
     private fun pushdata() {
-        tvsex=tv_sex_content.text.toString()
+        tvsex = tv_sex_content.text.toString()
         map.clear()
-        when(tvsex){
-            "男"->{
-                map["userGender"]="1"
+        when (tvsex) {
+            "男" -> {
+                map["userGender"] = "1"
 
             }
-            "女"->{
-                map["userGender"]="2"
+            "女" -> {
+                map["userGender"] = "2"
 
             }
-            else->{
-                map["userGender"]="0"
+            else -> {
+                map["userGender"] = "0"
 
             }
 
         }
-        map["nickname"]=tv_name_content.text.toString()
+        map["nickname"] = tv_name_content.text.toString()
 
-        map["companyName"]=tv_company_name_content.text.toString()
-        map["birthDate"]=tv_age_content.text.toString()
-        map["introduction"]=tv_signature_name_content.text.toString()
-        map["editorHead"]=isPushImage.toString()
+        map["companyName"] = tv_company_name_content.text.toString()
+        map["birthDate"] = tv_age_content.text.toString()
+        map["introduction"] = tv_signature_name_content.text.toString()
+        map["editorHead"] = isPushImage.toString()
         mPresenter.getEditUser(map)
     }
 
@@ -247,7 +250,7 @@ class UserInformationActivity : BaseActivity(),EditUserInfoContract.View, View.O
     }
 
     override fun onEditUser(str: String?) {
-        if (!str.isNullOrEmpty()){
+        if (!str.isNullOrEmpty()) {
             showToast(str!!)
 
         }
